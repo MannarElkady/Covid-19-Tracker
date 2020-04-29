@@ -38,7 +38,7 @@ data class GeneralInfo(val updated: Long
                        ,val affectedCountries: Long)
 
 @JsonClass(generateAdapter = true)
-    data class CountryHistory(val country: String
+data class CountryHistory(val country: String
                           ,val provinces: List<String>
                           ,val timeline: History
 )

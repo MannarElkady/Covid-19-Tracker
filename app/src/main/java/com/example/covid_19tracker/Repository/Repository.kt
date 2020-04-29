@@ -2,12 +2,8 @@ package com.example.covid_19tracker.Repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.covid_19tracker.Database.CountyEntity
-import com.example.covid_19tracker.Database.CovidDao
-import com.example.covid_19tracker.Database.Covid_19DataBase
-import com.example.covid_19tracker.Database.LocalHistory
-import com.example.covid_19tracker.Network.DiseaseAPI
-import com.example.covid_19tracker.Network.NetworkService
+import com.example.covid_19tracker.Database.*
+import com.example.covid_19tracker.Network.*
 
 class Repository(application: Application) {
     private var dao: CovidDao
@@ -20,6 +16,7 @@ class Repository(application: Application) {
         network = NetworkService.INSTANCE
     }
 
+
     fun refreshCountries() {
         //TODO implement Refresh data
     }
@@ -29,11 +26,8 @@ class Repository(application: Application) {
     }
 
     fun insertCountry(country: CountyEntity) {
-
     }
 
     fun insertHistory(localHistory: LocalHistory) {
-
     }
-
 }

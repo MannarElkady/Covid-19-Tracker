@@ -30,10 +30,10 @@ data class CountyEntity(
 @Entity(tableName = "country_info")
 data class LocalCountryInfo(
     @PrimaryKey
-    var id: Int = -1
-    , var iso2: String = ""
-    , var iso3: String = ""
-    , var flag: String = ""
+    var id: Int? = -1
+    , var iso2: String? = ""
+    , var iso3: String? = ""
+    , var flag: String? = ""
     , var lat: Double = 0.0
     , var long: Double = 0.0
 )
@@ -50,11 +50,11 @@ data class LocalCountryHistory(
 
 @Entity(tableName = "history")
 data class LocalHistory(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
     val cases: Map<String, Long>
     , val deaths: Map<String, Long>
-    , val recovered: Map<String, Long>
+    , val recovered: Map<String, Long>,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = -1
 )
 
 class MapConverter {
