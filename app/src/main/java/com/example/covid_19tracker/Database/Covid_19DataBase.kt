@@ -1,9 +1,7 @@
 package com.example.covid_19tracker.Database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 
 /**
  * A database that stores Covid-19 information.
@@ -12,7 +10,8 @@ import androidx.room.RoomDatabase
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [Country::class,Stat::class], version = 1, exportSchema = false)
+@Database(entities = [CountyEntity::class,LocalCountryHistory::class,LocalCountryInfo::class,LocalHistory::class], version = 1, exportSchema = false)
+@TypeConverters(MapConverter::class,ListConverter::class)
 abstract class Covid_19DataBase : RoomDatabase() {
 
     /**

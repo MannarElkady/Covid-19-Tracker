@@ -5,17 +5,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+
 @Dao
 interface CovidDao {
     @Insert(onConflict =OnConflictStrategy.REPLACE )
-    fun insertCountry(country: Country)
+    fun insertCountry(country: CountyEntity)
     @Insert(onConflict =OnConflictStrategy.REPLACE )
-    fun insertStat(stat: Stat)
+    fun insertCountryHistory(countryHistory: LocalCountryHistory)
     @Query("Select * FROM country")
-    fun getAllCountry():LiveData<List<Country>>
-    @Query("SELECT * FROM stat WHERE countryName=:countryName")
-    fun getStatByCountry(countryName:String):LiveData<List<Stat>>
+    fun getAllCountry():LiveData<List<CountyEntity>>
+    @Query("SELECT * FROM country_history WHERE country=:countryName")
+    fun geCountryHistory(countryName:String):LiveData<List<LocalCountryHistory>>
     // just for testing
-    @Query("SELECT * FROM country WHERE name=:countryName")
-    fun getCountryByName(countryName:String):Country
+    @Query("SELECT * FROM country WHERE country=:countryName")
+    fun getCountryByName(countryName:String):CountyEntity
 }
