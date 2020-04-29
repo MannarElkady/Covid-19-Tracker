@@ -70,6 +70,10 @@ dependencies {
     implementation "android.arch.work:work-runtime-ktx:$version_work"
 
     /*Ahmed*/
+    // Logging
+    implementation "com.jakewharton.timber:timber:$version_timber"
+    implementation "com.google.android.material:material:$version_material"
+
     /*Ahmed*/
     /*Manar*/
     /*Manar*/
