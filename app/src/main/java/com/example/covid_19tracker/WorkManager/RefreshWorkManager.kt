@@ -1,11 +1,25 @@
 package com.example.covid_19tracker.WorkManager
 
+import android.app.Application
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.example.covid_19tracker.Repository.Repository
+import timber.log.Timber
 
-class RefreshWorkManager(appContext: Context, params: WorkerParameters): CoroutineWorker(appContext, params) {
+class RefreshWorkManager(appContext: Context, params: WorkerParameters) : CoroutineWorker(appContext,params) {
+    companion object{
+        const val REFRESH_WORKER = "RefreshWorker"
+    }
+
     override suspend fun doWork(): Result {
-        TODO("Not yet implemented")
+         val repo = Repository(application = applicationContext as Application)
+         return try {
+             Timber.i("Hello From Work Manager")
+             repo.refreshCountries()
+             Result.success()
+         } catch (error:Throwable){
+             Result.failure()
+         }
     }
 }
