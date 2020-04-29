@@ -20,7 +20,7 @@ interface DiseaseAPI {
 }
 
 
-private val moshi = Moshi.Builder()
+ val moshi = Moshi.Builder()
     .add(MoshiJsonListAdapersFactory())
     .add(KotlinJsonAdapterFactory())
     .build()
@@ -40,4 +40,5 @@ object NetworkService{
     private val retrofitInstance = Retrofit.Builder().baseUrl(Constants.BASE_URL.value)
         .addConverterFactory(MoshiConverterFactory.create(moshi)).build()
     val INSTANCE = retrofitInstance.create(DiseaseAPI::class.java)
+
 }
