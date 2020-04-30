@@ -2,32 +2,36 @@ package com.example.covid_19tracker.Repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.covid_19tracker.Database.*
 import com.example.covid_19tracker.Network.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class Repository(application: Application) {
-    private var dao: CovidDao
-    private var network: DiseaseAPI
+class Repository(
+    private val remoteDataSource: DiseaseAPI,
+    private val localDataSource: CovidDao
+) : RepositoryContract {
 
-    //TODO create live Data
-    init {
-        val dataBase = Covid_19DataBase.getInstance(application)
-        dao = dataBase.covidDao
-        network = NetworkService.INSTANCE
+    val countries: LiveData<List<CountyEntity>>
+        get() = localDataSource.getAllCountry()
+
+    override suspend fun refreshCountries()  {
+        val countries = remoteDataSource.getCountriesData()
+        localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
     }
 
-
-    fun refreshCountries() {
-        //TODO implement Refresh data
+     override suspend fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
+         withContext(Dispatchers.IO) {
+             val countryHistory = remoteDataSource.getCountryHistory(countryName)
+             localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+         }
+         return localDataSource.geCountryHistory(countryName)
     }
-
-    fun getCountryHistory(countryName: String) {
-        // TODO implement get country history
-    }
-
-    fun insertCountry(country: CountyEntity) {
-    }
-
-    fun insertHistory(localHistory: LocalHistory) {
+    //For test Repository not form production
+   override suspend fun getCountryHistroyList(name :String):List<LocalCountryHistory>{
+        val countryHistory = remoteDataSource.getCountryHistory(name)
+        localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+        return localDataSource.getAllHistory()
     }
 }

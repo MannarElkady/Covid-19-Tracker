@@ -1,9 +1,6 @@
 package com.example.covid_19tracker.Database
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
+import androidx.room.*
 import com.example.covid_19tracker.Network.moshi
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Types
@@ -29,13 +26,13 @@ data class CountyEntity(
 
 @Entity(tableName = "country_info")
 data class LocalCountryInfo(
-    @PrimaryKey
-    var id: Int? = -1
-    , var iso2: String? = ""
-    , var iso3: String? = ""
-    , var flag: String? = ""
-    , var lat: Double = 0.0
-    , var long: Double = 0.0
+    @PrimaryKey(autoGenerate = true)
+     var id: Int = 0
+    , var iso2: String=""
+    , var iso3: String=""
+    , var flag: String=""
+    , var lat: Double=0.0
+    , var long: Double=0.0
 )
 
 
@@ -43,27 +40,27 @@ data class LocalCountryInfo(
 data class LocalCountryHistory(
     @PrimaryKey
     val country: String
-    , val provinces: List<String>,
+    , val provinces: List<String>?,
     @Embedded
     val timeline: LocalHistory
 )
 
 @Entity(tableName = "history")
 data class LocalHistory(
+    @PrimaryKey(autoGenerate = true)
+    var id :Int = 0,
     val cases: Map<String, Long>
     , val deaths: Map<String, Long>
-    , val recovered: Map<String, Long>,
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = -1
+    , val recovered: Map<String, Long>
+
 )
 
 class MapConverter {
     @TypeConverter
     fun fromStringMap(data: String): Map<String, Long>? {
-        val type = Types.newParameterizedType(Map::class.java, String::class.java, Long::class.java)
+        val type = Types.newParameterizedType(Map::class.java, String::class.java, Long::class.javaObjectType)
         val adapter: JsonAdapter<Map<String, Long>> = moshi.adapter(type)
-        var map = adapter.fromJson(data)
-        return map
+        return adapter.fromJson(data)
     }
 
     @TypeConverter
