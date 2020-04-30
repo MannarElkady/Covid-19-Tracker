@@ -5,21 +5,44 @@ import com.example.covid_19tracker.Database.LocalCountryHistory
 import com.example.covid_19tracker.Database.LocalCountryInfo
 import com.example.covid_19tracker.Database.LocalHistory
 
-public fun CountyData.asLocalCountryEntity() : CountyEntity {
-    return CountyEntity(this.country,this.countryInfo.asLocalCountryInfo(),this.cases,this.todayCases,this.deaths,
-        this.todayDeaths,this.recovered,this.active,this.critical,this.casesPerOneMillion,
-        this.deathsPerOneMillion,this.updated)
+fun CountryData.asLocalCountryEntity(): CountyEntity {
+    return CountyEntity(
+        this.country,
+        this.countryInfo.asLocalCountryInfo(),
+        this.cases,
+        this.todayCases,
+        this.deaths,
+        this.todayDeaths,
+        this.recovered,
+        this.active,
+        this.critical,
+        this.casesPerOneMillion,
+        this.deathsPerOneMillion,
+        this.updated
+    )
 }
 
-public fun CountryInfo.asLocalCountryInfo() : LocalCountryInfo {
-    return LocalCountryInfo(this._id,this.iso2,this.iso3,this.flag,this.lat,this.long)
+fun CountryInfo.asLocalCountryInfo(): LocalCountryInfo {
+    return LocalCountryInfo(
+        iso2 = iso2 ?: "",
+        iso3 = iso3 ?: "",
+        flag = flag ?: "",
+        lat = lat,
+        long = long
+    )
 }
 
-public fun CountryHistory.asLocalCountryHistory() : LocalCountryHistory {
-    return LocalCountryHistory(this.country,this.provinces,this.timeline.asLocalHistory())
+fun CountryHistory.asLocalCountryHistory(): LocalCountryHistory {
+    return LocalCountryHistory(this.country, this.provinces, this.timeline.asLocalHistory())
 }
 
-public fun History.asLocalHistory() : LocalHistory {
-    return LocalHistory(this.cases,this.deaths,this.recovered)
+fun History.asLocalHistory(): LocalHistory {
+    return LocalHistory(cases = cases, deaths = deaths, recovered = recovered)
 }
 
+fun List<CountryData>.asLocalCountryList(): List<CountyEntity> {
+    return map { it.asLocalCountryEntity() }
+}
+fun List<CountryHistory>.asLocalCountryHistoryList(): List<LocalCountryHistory> {
+    return map { it.asLocalCountryHistory() }
+}

@@ -12,9 +12,9 @@ interface DiseaseAPI {
     @GET("/v2/all")
     suspend fun getGeneralInfo(): GeneralInfo
     @GET("/v2/countries")
-    suspend fun getCountriesData(): List<CountyData>
+    suspend fun getCountriesData(): List<CountryData>
     @GET("/v2/countries/{country}")
-    suspend fun getCountryData(@Path("country") countryName: String): CountyData
+    suspend fun getCountryData(@Path("country") countryName: String): CountryData
     @GET("/v2/historical/{country}")
     suspend fun getCountryHistory(@Path("country") countryName: String): CountryHistory
 }
@@ -29,7 +29,7 @@ interface DiseaseAPI {
 class MoshiJsonListAdapersFactory : JsonAdapter.Factory {
     override fun create(type: Type, annotations: MutableSet<out Annotation>, moshi: Moshi): JsonAdapter<*>? {
         return when (type) {
-            Types.newParameterizedType(ArrayList::class.java, CountyData::class.java) -> moshi.adapter<List<CountyData>>(type)
+            Types.newParameterizedType(ArrayList::class.java, CountryData::class.java) -> moshi.adapter<List<CountryData>>(type)
             Types.newParameterizedType(ArrayList::class.java, String::class.java) -> moshi.adapter<List<String>>(type)
             else -> null
         }
