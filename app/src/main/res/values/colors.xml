@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
     <!--Ahmed-->
     <!--Ahmed-->
     <!--Manar-->
+    <color name="primaryColor">#6363eb</color>
+    <color name="primaryLightColor">#9a91ff</color>
+    <color name="primaryDarkColor">#2039b8</color>
+    <color name="secondaryColor">#372b7b</color>
+    <color name="secondaryLightColor">#6754ab</color>
+    <color name="applicationBackgroundColor">#F8F8FF</color>
+    <color name="secondaryDarkColor">#00044e</color>
+    <color name="whiteColor">#ffffff</color>
+    <color name="BlackColor">#000000</color>
+    <color name="secondaryTextColor">#fa5252</color>
     <!--Manar-->
 </resources>

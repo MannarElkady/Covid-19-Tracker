@@ -20,6 +20,7 @@ buildscript {
         version_timber = "4.7.1"
         /*Ahmed*/
         /*Manar*/
+        version_navigation_controller = "2.3.0-alpha06"
         /*Manar*/
     }
     repositories {
@@ -42,7 +43,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url 'https://jitpack.io' }
     }
 }
 
