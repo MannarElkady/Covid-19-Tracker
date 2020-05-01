@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.UI
+package com.example.covid_19tracker.UI.Fragments
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -13,7 +13,8 @@ import com.example.covid_19tracker.ViewModels.SubscribedViewModel
 class SubscribedFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SubscribedFragment()
+        fun newInstance() =
+            SubscribedFragment()
     }
 
     private lateinit var viewModel: SubscribedViewModel
