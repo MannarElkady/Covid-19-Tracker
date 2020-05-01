@@ -24,12 +24,15 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        clickMeText.setOnClickListener({
-            it.findNavController().navigate(R.id.action_homeFragment_to_countryDetails)
-        })
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        clickMeText.setOnClickListener({
+            it.findNavController().navigate(R.id.action_homeFragment_to_countryDetails)
+        })
+        super.onViewCreated(view, savedInstanceState)
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)

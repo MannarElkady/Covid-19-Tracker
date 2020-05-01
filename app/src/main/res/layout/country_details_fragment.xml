@@ -81,6 +81,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/primaryLightColor"
             android:background="@color/secondaryTextColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="15dp">
@@ -94,7 +95,7 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@color/primaryColor"
+            app:cardBackgroundColor="@color/secondaryTextColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="15dp">
 
@@ -106,6 +107,7 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            app:cardBackgroundColor="@color/primaryDarkColor"
             android:background="@color/primaryLightColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="15dp">
