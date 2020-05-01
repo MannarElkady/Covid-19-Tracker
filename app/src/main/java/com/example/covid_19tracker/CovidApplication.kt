@@ -10,7 +10,6 @@ import com.example.covid_19tracker.WorkManager.RefreshWorkManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 

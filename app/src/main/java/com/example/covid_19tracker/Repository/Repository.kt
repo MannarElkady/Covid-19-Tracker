@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.covid_19tracker.Database.*
 import com.example.covid_19tracker.Network.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class Repository(
     private val remoteDataSource: DiseaseAPI,
-    private val localDataSource: CovidDao
+    private val localDataSource: CovidDao,
+    private val ioDispatcher: CoroutineDispatcher=Dispatchers.IO
 ) : RepositoryContract {
 
     val countries: LiveData<List<CountyEntity>>
@@ -21,10 +21,12 @@ class Repository(
         localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
     }
 
-     override suspend fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
-         withContext(Dispatchers.IO) {
-             val countryHistory = remoteDataSource.getCountryHistory(countryName)
-             localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+     override  fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
+         runBlocking {
+             withContext(ioDispatcher) {
+                 val countryHistory = remoteDataSource.getCountryHistory(countryName)
+                 localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+             }
          }
          return localDataSource.geCountryHistory(countryName)
     }
