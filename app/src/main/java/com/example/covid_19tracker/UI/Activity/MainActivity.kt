@@ -1,11 +1,10 @@
-package com.example.covid_19tracker.UI
+package com.example.covid_19tracker.UI.Activity
 
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.covid_19tracker.R
 import kotlinx.android.synthetic.main.activity_main.*
 

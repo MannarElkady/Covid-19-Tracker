@@ -3,5 +3,8 @@
     <!--Ahmed-->
     <!--Ahmed-->
     <!--Manar-->
+    <string name="Setting">الأعدادات</string>
+    <string name="Subscribed">المتابعات</string>
+    <string name="Home">الحالة العامة</string>
     <!--Manar-->
 </resources>

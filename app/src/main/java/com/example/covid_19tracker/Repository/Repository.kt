@@ -1,6 +1,7 @@
 package com.example.covid_19tracker.Repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.covid_19tracker.Database.*
@@ -16,16 +17,18 @@ class Repository(
     val countries: LiveData<List<CountyEntity>>
         get() = localDataSource.getAllCountry()
 
-    override suspend fun refreshCountries()  {
+    override suspend fun refreshCountries() {
         val countries = remoteDataSource.getCountriesData()
         localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
+        countries.forEach{
+            val countryHistory = remoteDataSource.getCountryHistory(it.country)
+            localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+        }
     }
-
-     override suspend fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
-         withContext(Dispatchers.IO) {
-             val countryHistory = remoteDataSource.getCountryHistory(countryName)
-             localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
-         }
+    override suspend fun getCountryData(countryName: String):CountyEntity?{
+        return localDataSource.getCountryByName(countryName)
+    }
+    override suspend fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
          return localDataSource.geCountryHistory(countryName)
     }
     //For test Repository not form production
