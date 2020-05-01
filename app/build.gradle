@@ -75,6 +75,7 @@ dependencies {
     // Logging
     implementation "com.jakewharton.timber:timber:$version_timber"
     implementation "com.google.android.material:material:$version_material"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     /*Ahmed*/
 
     /*Manar*/

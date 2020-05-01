@@ -15,6 +15,7 @@ buildscript {
         version_glide ='4.11.0'
 
         /*Ahmed*/
+        coroutinesVersion = '1.2.1'
         version_material = "1.1.0"
         version_timber = "4.7.1"
         /*Ahmed*/

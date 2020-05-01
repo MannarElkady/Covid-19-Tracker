@@ -3,18 +3,18 @@ package com.example.covid_19tracker.Network
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class CountyData(val country : String
-                      ,val countryInfo : CountryInfo
-                      ,val cases: Long
-                      ,val todayCases: Long
-                      ,val deaths: Long
-                      ,val todayDeaths: Long
-                      ,val recovered: Long
-                      ,val active: Long
-                      ,val critical: Long
-                      ,val casesPerOneMillion: Long
-                      ,val deathsPerOneMillion: Long
-                      ,val updated: Long)
+data class CountryData(val country : String
+                       , val countryInfo : CountryInfo
+                       , val cases: Long
+                       , val todayCases: Long
+                       , val deaths: Long
+                       , val todayDeaths: Long
+                       , val recovered: Long
+                       , val active: Long
+                       , val critical: Long
+                       , val casesPerOneMillion: Long
+                       , val deathsPerOneMillion: Long
+                       , val updated: Long)
 
 @JsonClass(generateAdapter = true)
 data class CountryInfo(val _id: Int?
