@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.CountryDetails">
+    tools:context=".UI.Fragments.CountryDetailsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,43 +32,61 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/dateTimeTextView"
+                    style="@style/informText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="46dp"
+                    android:text="TextView"
+                    android:textColor="@color/whiteColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/deathTodayTextView"
+                    style="@style/informText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     android:text="TextView"
                     android:textAlignment="center"
                     android:textColor="@color/whiteColor"
-                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recoveredTodayTextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/casesTodayTextView" />
 
                 <TextView
                     android:id="@+id/casesTodayTextView"
+                    style="@style/informText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="2dp"
                     android:text="TextView"
                     android:textAlignment="center"
                     android:textColor="@color/whiteColor"
-                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="@+id/deathTodayTextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/dateTimeTextView" />
 
                 <TextView
                     android:id="@+id/recoveredTodayTextView"
+                    style="@style/informText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="64dp"
                     android:text="TextView"
                     android:textAlignment="center"
                     android:textColor="@color/whiteColor"
-                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/deathTodayTextView" />
@@ -87,6 +105,36 @@
             app:cardElevation="15dp">
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/informText"
+                        android:text="DEATHS" />
+
+                    <TextView
+                        android:id="@+id/totalDeathsTextView"
+                        style="@style/importantText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical"
+                        android:text="TextView" />
+
+                </LinearLayout>
+            </LinearLayout>
         </io.armcha.elasticview.ElasticView>
 
         <io.armcha.elasticview.ElasticView
@@ -99,6 +147,34 @@
             app:cardCornerRadius="10dp"
             app:cardElevation="15dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/informText"
+                android:text="CASES" />
+
+                <TextView
+                    android:id="@+id/totalCasesTextView"
+                    style="@style/importantText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="TextView" />
+            </LinearLayout>
+            </LinearLayout>
         </io.armcha.elasticview.ElasticView>
 
         <io.armcha.elasticview.ElasticView
@@ -111,7 +187,34 @@
             android:background="@color/primaryLightColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/informText"
+                    android:text="RECOVERED" />
 
+                <TextView
+                    android:id="@+id/totalRecoveredTextView"
+                    style="@style/importantText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+            </LinearLayout>
         </io.armcha.elasticview.ElasticView>
     </LinearLayout>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.UI
+package com.example.covid_19tracker.UI.Fragments
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,26 +8,27 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.covid_19tracker.R
-import com.example.covid_19tracker.ViewModels.SubscribedViewModel
+import com.example.covid_19tracker.ViewModels.SettingViewModel
 
-class SubscribedFragment : Fragment() {
+class SettingFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SubscribedFragment()
+        fun newInstance() =
+            SettingFragment()
     }
 
-    private lateinit var viewModel: SubscribedViewModel
+    private lateinit var viewModel: SettingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.subscribed_fragment, container, false)
+        return inflater.inflate(R.layout.setting_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SubscribedViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(SettingViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

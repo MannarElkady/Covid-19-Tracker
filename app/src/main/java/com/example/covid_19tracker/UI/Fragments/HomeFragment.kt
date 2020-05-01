@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.UI
+package com.example.covid_19tracker.UI.Fragments
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.home_fragment.*
 class HomeFragment : Fragment() {
 
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() =
+            HomeFragment()
     }
 
     private lateinit var viewModel: HomeViewModel

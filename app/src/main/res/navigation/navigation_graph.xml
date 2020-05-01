@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.covid_19tracker.UI.HomeFragment"
+        android:name="com.example.covid_19tracker.UI.Fragments.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
         <action
@@ -16,17 +16,17 @@
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.covid_19tracker.UI.SettingFragment"
+        android:name="com.example.covid_19tracker.UI.Fragments.SettingFragment"
         android:label="search_fragment"
         tools:layout="@layout/setting_fragment"/>
     <fragment
         android:id="@+id/subscribedFragment"
-        android:name="com.example.covid_19tracker.UI.SubscribedFragment"
+        android:name="com.example.covid_19tracker.UI.Fragments.SubscribedFragment"
         android:label="subscribed_fragment"
         tools:layout="@layout/subscribed_fragment" />
     <fragment
         android:id="@+id/countryDetails"
-        android:name="com.example.covid_19tracker.UI.CountryDetails"
+        android:name="com.example.covid_19tracker.UI.Fragments.CountryDetailsFragment"
         android:label="country_details_fragment"
         tools:layout="@layout/country_details_fragment" />
 </navigation>

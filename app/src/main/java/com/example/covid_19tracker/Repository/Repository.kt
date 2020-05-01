@@ -16,7 +16,7 @@ class Repository(
     val countries: LiveData<List<CountyEntity>>
         get() = localDataSource.getAllCountry()
 
-    override suspend fun refreshCountries()  {
+    override suspend fun refreshCountries() {
         val countries = remoteDataSource.getCountriesData()
         localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
     }
