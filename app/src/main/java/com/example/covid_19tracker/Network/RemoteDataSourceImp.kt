@@ -1,8 +1,6 @@
 package com.example.covid_19tracker.Network
 
-import javax.inject.Inject
-
-class RemoteDataSource : DiseaseAPI {
+object RemoteDataSource : DiseaseAPI {
     private val network by lazy { NetworkService.INSTANCE }
     override suspend fun getGeneralInfo(): GeneralInfo {
         return network.getGeneralInfo()

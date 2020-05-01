@@ -15,7 +15,7 @@ class RefreshWorkManager(val appContext: Context, params: WorkerParameters) : Co
     }
 
     override suspend fun doWork(): Result {
-        val remoteDataSource = RemoteDataSource()
+        val remoteDataSource = RemoteDataSource
         val localDataSource= LocalDataSource(context = appContext)
          val repo = Repository(remoteDataSource=remoteDataSource,localDataSource = localDataSource)
          return try {
