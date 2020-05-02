@@ -18,7 +18,7 @@ interface CovidDao {
     fun geCountryHistory(countryName:String):LiveData<LocalCountryHistory>
     // just for testing
     @Query("SELECT * FROM country WHERE country=:countryName")
-    fun getCountryByName(countryName:String):CountyEntity?
+    fun getCountryByName(countryName:String):LiveData<CountyEntity>?
     @Query("SELECT * FROM country_history")
     fun getAllHistory():List<LocalCountryHistory>
 }

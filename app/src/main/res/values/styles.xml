@@ -17,6 +17,13 @@
         <item name="android:radius">5dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="smallText" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lines">2</item>
+        <item name="android:innerRadius">5dp</item>
+        <item name="android:radius">5dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="informText" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textSize">18sp</item>
         <item name="android:lines">1</item>

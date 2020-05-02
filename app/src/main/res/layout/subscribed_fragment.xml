@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/applicationBackgroundColor"
+    android:background="@drawable/subscripe_background"
     tools:context=".UI.Fragments.SubscribedFragment">
 
-    <TextView
+    <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+        android:id="@+id/recycle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/Subscribed" />
+        app:divider="@drawable/subscribe_item_divider"
+        app:item_layout="@layout/subscribe_item_recycle"/>
 
 </FrameLayout>

@@ -12,14 +12,21 @@ class Repository(
     private val localDataSource: CovidDao,
     private val ioDispatcher: CoroutineDispatcher=Dispatchers.IO
 ) : RepositoryContract {
-
     val countries: LiveData<List<CountyEntity>>
         get() = localDataSource.getAllCountry()
 
     override suspend fun refreshCountries() {
         val countries = remoteDataSource.getCountriesData()
         localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
+        countries.forEach{
+            val countryHistory = remoteDataSource.getCountryHistory(it.country)
+             localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+        }
     }
+    override suspend fun getCountryData(countryName: String):LiveData<CountyEntity>?{
+        return localDataSource.getCountryByName(countryName)
+    }
+
 
      override  fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
          runBlocking {

@@ -28,7 +28,7 @@ class LocalDataSource(context: Context) : CovidDao {
         return dao.geCountryHistory(countryName)
     }
 
-    override fun getCountryByName(countryName: String): CountyEntity? {
+    override fun getCountryByName(countryName: String): LiveData<CountyEntity>? {
         return dao.getCountryByName(countryName)
     }
 
