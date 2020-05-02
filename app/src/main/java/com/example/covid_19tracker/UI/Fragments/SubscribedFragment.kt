@@ -39,9 +39,18 @@ class SubscribedFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(SubscribedViewModel::class.java)
         // TODO: Use the ViewModel
-        viewModel.getFavouriteCountryList().observe(viewLifecycleOwner,Observer<List<CountyEntity>>{
-            setUpTableView(it)
+        viewModel.getFavouriteCountryList()?.observe(viewLifecycleOwner,Observer<List<CountyEntity>>{
+            it?.let {
+                setUpTableView(it)
+            }
+            if(it.size == 0){
+                displayNoSubscription()
+            }
         })
+    }
+
+    private fun displayNoSubscription() {
+        no_subscription_layout.visibility = View.VISIBLE
     }
 
     private fun setUpTableView(countriesList : List<CountyEntity>) {

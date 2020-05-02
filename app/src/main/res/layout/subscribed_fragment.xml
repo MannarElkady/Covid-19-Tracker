@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     android:background="@drawable/subscripe_background"
     tools:context=".UI.Fragments.SubscribedFragment">
+<LinearLayout
+    android:id="@+id/no_subscription_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:visibility="invisible">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_grim_selected"/>
 
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/importantText"
+        android:text="@string/No_SubScribed_String" />
+</LinearLayout>
     <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"

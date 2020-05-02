@@ -1,26 +1,25 @@
 package com.example.covid_19tracker.UI.Fragments
 
-import android.os.Build
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.covid_19tracker.Database.CountyEntity
 import com.example.covid_19tracker.Database.LocalCountryHistory
-
 import com.example.covid_19tracker.R
 import com.example.covid_19tracker.ViewModels.CountryDetailsViewModel
+import com.github.ivbaranov.mfb.MaterialFavoriteButton.OnFavoriteChangeListener
 import com.soywiz.klock.DateTime
 import kotlinx.android.synthetic.main.country_details_fragment.*
 import timber.log.Timber
-import java.time.LocalDateTime
+
 
 class CountryDetailsFragment : Fragment() {
 
+    private lateinit var country: CountyEntity
     companion object {
         fun newInstance() =
             CountryDetailsFragment()
@@ -39,11 +38,14 @@ class CountryDetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setDateTime()
+        changeSubscription()
         viewModel = ViewModelProviders.of(this).get(CountryDetailsViewModel::class.java)
         // TODO: Use the ViewModel
         viewModel.getCountryData()?.observe(viewLifecycleOwner,Observer<CountyEntity>{
             it?.let {
+                country = it
                 setUpCountryData(it)
+                setUpSubscriptionButton(it.isSubscribed)
             }
         })
         viewModel.getCountryHistory().observe(viewLifecycleOwner,Observer<LocalCountryHistory>{
@@ -53,6 +55,16 @@ class CountryDetailsFragment : Fragment() {
                 Timber.w(it.toString())
             }
         })
+    }
+
+    fun setUpSubscriptionButton(isSubscribed : Boolean){
+        subscribeButton.isFavorite = isSubscribed
+    }
+    private fun changeSubscription() {
+        subscribeButton.setOnFavoriteChangeListener(
+            OnFavoriteChangeListener { buttonView, favorite ->
+                viewModel.updateCountrySubscribe(country,favorite)
+            })
     }
 
     private fun setUpCountryData(countyEntity: CountyEntity) {
@@ -69,6 +81,7 @@ class CountryDetailsFragment : Fragment() {
 
     fun setUICardsEmpty(){
     }
+
 
     fun setUICards(localCountryHistory: LocalCountryHistory){
 //        totalCasesTextView.setText(localCountryHistory.timeline.cases.values.last().toString())
