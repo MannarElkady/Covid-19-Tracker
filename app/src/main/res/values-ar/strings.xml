@@ -7,6 +7,8 @@
     <string name="Setting">الأعدادات</string>
     <string name="Subscribed">المتابعات</string>
     <string name="Home">الحالة العامة</string>
+    <string name="ApplicationChannelName">Covid_19 Tracker</string>
+    <string name="ApplicationChannelDescription">Covid_19 Tracker Notfications Channel</string>
     <string name="No_SubScribed_String">لم تقم بأختيار أي متابعات </string>
     <!--Manar-->
 </resources>

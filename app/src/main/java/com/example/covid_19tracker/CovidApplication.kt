@@ -1,10 +1,7 @@
 package com.example.covid_19tracker
 
 import android.app.Application
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.example.covid_19tracker.Repository.Repository
 import com.example.covid_19tracker.WorkManager.RefreshWorkManager
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +16,7 @@ class CovidApplication:Application() {
 
     private val appScope =  CoroutineScope(Dispatchers.Default)
     //TODO >> get the setting user defined refresh time from shared preference
-    private var REFRESH_TIME:Long = 2
+    private var REFRESH_TIME:Long = 15
     set(value) {
         field = value
     }
@@ -36,6 +33,7 @@ class CovidApplication:Application() {
     }
     fun setUpRefreshWorker(){
         val constraints = Constraints.Builder().setRequiresBatteryNotLow(true)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .setRequiresDeviceIdle(false).build()
         val refreshRequest = PeriodicWorkRequestBuilder<RefreshWorkManager>(REFRESH_TIME,TimeUnit.MINUTES)
             .setConstraints(constraints).build()
