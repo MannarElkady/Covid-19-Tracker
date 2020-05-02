@@ -3,8 +3,10 @@
     <!--Ahmed-->
     <!--Ahmed-->
     <!--Manar-->
+    <string name="app_name">Covid-19 Tracker</string>
     <string name="Setting">الأعدادات</string>
     <string name="Subscribed">المتابعات</string>
     <string name="Home">الحالة العامة</string>
+    <string name="No_SubScribed_String">لم تقم بأختيار أي متابعات </string>
     <!--Manar-->
 </resources>

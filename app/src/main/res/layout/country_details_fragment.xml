@@ -18,8 +18,8 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:background="@drawable/background_det"
+            android:padding="16dp"
             android:orientation="horizontal">
-
             <!--            <androidx.appcompat.widget.AppCompatImageView-->
             <!--                android:layout_width="wrap_content"-->
             <!--                android:layout_marginLeft="15dp"-->
@@ -29,34 +29,53 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="0dp"
                 android:layout_weight="1">
+
+                <com.github.ivbaranov.mfb.MaterialFavoriteButton
+                    android:id="@+id/subscribeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="46dp"
+                    android:layout_marginEnd="46dp"
+                    app:mfb_animate_favorite="true"
+                    app:mfb_favorite_image="@drawable/ic_grim_selected"
+                    app:mfb_not_favorite_image="@drawable/ic_grim_unselected"
+                    app:mfb_rotation_duration="400"
+                    app:mfb_rotation_angle="360"
+                    app:mfb_bounce_duration="300"
+                    app:mfb_color="black"
+                    app:mfb_size="75"
+                    app:mfb_type="heart"
+                    android:textColor="@color/whiteColor"
+                    app:layout_constraintBottom_toTopOf="@+id/dateTimeTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/dateTimeTextView"
                     style="@style/smallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="46dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="46dp"
-                    android:layout_marginBottom="8dp"
                     android:text="TextView"
                     android:textColor="@color/whiteColor"
+                    app:layout_constraintTop_toBottomOf="@+id/subscribeButton"
                     app:layout_constraintBottom_toTopOf="@+id/casesTodayTextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/deathTodayTextView"
                     style="@style/informText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginEnd="46dp"
                     android:layout_marginBottom="46dp"
                     android:text="TextView"
                     android:textAlignment="center"
-                    android:textColor="@color/whiteColor"
+                    android:textColor="@color/secondaryTextColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/casesTodayTextView" />
@@ -68,7 +87,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="46dp"
-                    android:layout_marginBottom="4dp"
                     android:text="TextView"
                     android:textAlignment="center"
                     android:textColor="@color/whiteColor"

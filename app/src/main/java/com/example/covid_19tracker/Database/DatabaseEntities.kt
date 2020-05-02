@@ -22,6 +22,7 @@ data class CountyEntity(
     , val casesPerOneMillion: Long
     , val deathsPerOneMillion: Long
     , val updated: Long
+    , val isSubscribed : Boolean = false
 )
 
 @Entity(tableName = "country_info")

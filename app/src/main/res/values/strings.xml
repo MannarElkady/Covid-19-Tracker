@@ -8,6 +8,6 @@
     <string name="Home">State</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="No_SubScribed_String">No Subscription Yet.. Go to Home Screen and Select a country to subscribe</string>
     <!--Manar-->
 </resources>

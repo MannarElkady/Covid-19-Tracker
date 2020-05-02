@@ -2,6 +2,7 @@ package com.example.covid_19tracker.ViewModels
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.covid_19tracker.CovidApplication
 import com.example.covid_19tracker.Database.CountyEntity
 import com.example.covid_19tracker.Database.LocalDataSource
 import com.example.covid_19tracker.Network.RemoteDataSource
@@ -13,14 +14,15 @@ class SubscribedViewModel(application: Application) : AndroidViewModel(applicati
     private val covidRepo :Repository
     private var countriesLiveData : LiveData<List<CountyEntity>>
     init {
-        covidRepo = Repository(RemoteDataSource(), LocalDataSource(application))
+        covidRepo = (application as CovidApplication).repository
         countriesLiveData = MutableLiveData()
         viewModelScope.launch {
-            countriesLiveData = covidRepo.countries
+            countriesLiveData = covidRepo.getAllSubscribedCountries(isSubscribed = true)
         }
     }
 
     fun getFavouriteCountryList():LiveData<List<CountyEntity>>{
         return countriesLiveData
     }
+
 }
