@@ -13,7 +13,6 @@ buildscript {
         version_work = '2.3.4'
         version_navigation = '1.0.0-beta02'
         version_glide ='4.11.0'
-
         /*Ahmed*/
         coroutinesVersion = '1.2.1'
         version_material = "1.1.0"
@@ -21,6 +20,10 @@ buildscript {
         /*Ahmed*/
         /*Manar*/
         version_navigation_controller = "2.3.0-alpha06"
+        version_smooth_bar = '1.7.5'
+        version_viewModel_kotlin = '2.2.0'
+        version_elastic_card = '0.2.0'
+        klockVersion = "1.7.3"
         /*Manar*/
     }
     repositories {
