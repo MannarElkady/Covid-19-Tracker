@@ -13,7 +13,6 @@ class Repository(
     private val remoteDataSource: DiseaseAPI,
     private val localDataSource: CovidDao
 ) : RepositoryContract {
-
     val countries: LiveData<List<CountyEntity>>
         get() = localDataSource.getAllCountry()
 
@@ -22,10 +21,10 @@ class Repository(
         localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
         countries.forEach{
             val countryHistory = remoteDataSource.getCountryHistory(it.country)
-            localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+             localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
         }
     }
-    override suspend fun getCountryData(countryName: String):CountyEntity?{
+    override suspend fun getCountryData(countryName: String):LiveData<CountyEntity>?{
         return localDataSource.getCountryByName(countryName)
     }
     override suspend fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
