@@ -63,7 +63,9 @@ class CountryDetailsFragment : Fragment() {
     private fun changeSubscription() {
         subscribeButton.setOnFavoriteChangeListener(
             OnFavoriteChangeListener { buttonView, favorite ->
-                viewModel.updateCountrySubscribe(country,favorite)
+                country?.let {
+                    viewModel.updateCountrySubscribe(country,favorite)
+                }
             })
     }
 

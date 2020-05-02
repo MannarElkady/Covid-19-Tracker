@@ -51,6 +51,7 @@ class SubscribedFragment : Fragment() {
 
     private fun displayNoSubscription() {
         no_subscription_layout.visibility = View.VISIBLE
+        recycle_view.visibility = View.INVISIBLE
     }
 
     private fun setUpTableView(countriesList : List<CountyEntity>) {

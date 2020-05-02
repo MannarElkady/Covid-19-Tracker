@@ -37,7 +37,6 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
                 covidRepo.updateSubscribedCountry(countyEntity.country, checkState)
             }
         }
-
     }
     fun getCountryData() : LiveData<CountyEntity>?{
         return countryEntityLiveData

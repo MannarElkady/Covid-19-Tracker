@@ -39,7 +39,7 @@
                     android:layout_marginTop="46dp"
                     android:layout_marginEnd="46dp"
                     app:mfb_animate_favorite="true"
-                    app:mfb_favorite_image="@drawable/ic_grim_selected"
+                    app:mfb_favorite_image="@drawable/blue_selected_grim_ripper"
                     app:mfb_not_favorite_image="@drawable/ic_grim_unselected"
                     app:mfb_rotation_duration="400"
                     app:mfb_rotation_angle="360"
