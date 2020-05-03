@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 /*Plugins*/
-apply plugin: "androidx.navigation.safeargs"
+apply plugin: "androidx.navigation.safeargs.kotlin"
 /*Plugins*/
 android {
     compileSdkVersion 29
@@ -25,6 +25,17 @@ android {
         }
 
     }
+    dataBinding{
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 
 }
 
@@ -41,6 +52,7 @@ dependencies {
 
     // Android KTX
     implementation "androidx.core:core-ktx:$version_core"
+    implementation "androidx.fragment:fragment-ktx:$version_fragmetn_kotlin"
 
     // Navigation
     implementation "android.arch.navigation:navigation-fragment-ktx:$version_navigation"
@@ -77,6 +89,25 @@ dependencies {
     implementation "com.jakewharton.timber:timber:$version_timber"
     implementation "com.google.android.material:material:$version_material"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_kotlin_coroutines"
+    // Dependencies for local unit tests
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_kotlin_coroutines"
+    // Dependencies for Android instrumented unit tests
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_kotlin_coroutines"
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    // Testing code should not be included in the main code.
+    // Once https://issuetracker.google.com/128612536 is fixed this can be fixed.
+    debugImplementation "androidx.fragment:fragment-testing:$version_fragmetn_kotlin"
+    implementation "androidx.test:core:$androidXTestCoreVersion"
     /*Ahmed*/
 
     /*Manar*/
@@ -91,13 +122,18 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation_controller"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation_controller"
 
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.16'
+    kapt 'com.google.dagger:dagger-compiler:2.16'
+    implementation "com.google.dagger:dagger-android:2.16"
+    kapt "com.google.dagger:dagger-android-processor:2.16"
+
     //Time
     implementation "com.soywiz.korlibs.klock:klock-jvm:$klockVersion"
 
     //DragDropSwipeRecycleView
     implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.6.0'
-
     //subscribe Button
-    compile 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
+    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
     /*Manar*/
 }

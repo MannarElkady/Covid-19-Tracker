@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".UI.Fragments.SubscribedFragment">
+    tools:context=".ui.fragments.SubscribedFragment">
 <RelativeLayout
     android:id="@+id/no_subscription_layout"
     android:layout_width="match_parent"
@@ -47,5 +47,4 @@
         app:divider="@drawable/subscribe_item_divider"
         app:item_layout="@layout/subscribe_item_recycle"
         app:swiped_item_opacity_fades_on_swiping="true" />
-
 </FrameLayout>

@@ -7,27 +7,35 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.covid_19tracker.UI.Fragments.HomeFragment"
+        android:name="com.example.covid_19tracker.ui.fragments.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_countryDetails"
+            app:destination="@id/countryDetails"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.covid_19tracker.UI.Fragments.SettingFragment"
+        android:name="com.example.covid_19tracker.ui.fragments.SettingFragment"
         android:label="search_fragment"
         tools:layout="@layout/setting_fragment"/>
     <fragment
         android:id="@+id/subscribedFragment"
-        android:name="com.example.covid_19tracker.UI.Fragments.SubscribedFragment"
+        android:name="com.example.covid_19tracker.ui.fragments.SubscribedFragment"
         android:label="subscribed_fragment"
         tools:layout="@layout/subscribed_fragment" />
     <fragment
         android:id="@+id/countryDetails"
-        android:name="com.example.covid_19tracker.UI.Fragments.CountryDetailsFragment"
+        android:name="com.example.covid_19tracker.ui.fragments.CountryDetailsFragment"
         android:label="country_details_fragment"
         tools:layout="@layout/country_details_fragment" >
         <argument
             android:name="contryData"
-            app:argType="com.example.covid_19tracker.Database.CountyEntity" />
+            app:argType="com.example.covid_19tracker.database.CountyEntity" />
     </fragment>
     <action android:id="@+id/action_global_countryDetails"
         app:destination="@id/countryDetails" />

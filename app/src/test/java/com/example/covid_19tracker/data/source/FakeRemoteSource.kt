@@ -1,6 +1,6 @@
 package com.example.covid_19tracker.data.source
 
-import com.example.covid_19tracker.Network.*
+import com.example.covid_19tracker.network.*
 
 class FakeRemoteSource(var countries:MutableList<CountryData>,var history: MutableList<CountryHistory>): DiseaseAPI {
     override suspend fun getGeneralInfo(): GeneralInfo {

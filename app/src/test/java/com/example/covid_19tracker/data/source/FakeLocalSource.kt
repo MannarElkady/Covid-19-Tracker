@@ -1,9 +1,9 @@
 package com.example.covid_19tracker.data.source
 
 import androidx.lifecycle.LiveData
-import com.example.covid_19tracker.Database.CountyEntity
-import com.example.covid_19tracker.Database.CovidDao
-import com.example.covid_19tracker.Database.LocalCountryHistory
+import com.example.covid_19tracker.database.CountyEntity
+import com.example.covid_19tracker.database.CovidDao
+import com.example.covid_19tracker.database.LocalCountryHistory
 
 class FakeLocalSource(
     var countries: MutableList<CountyEntity>?,
@@ -26,21 +26,36 @@ class FakeLocalSource(
         TODO("Not yet implemented")
     }
 
-    override fun getAllSubscribedCountries(isSubscribed: Boolean): LiveData<List<CountyEntity>> {
+    override fun getCountryByCases(): LiveData<List<CountyEntity>> {
         TODO("Not yet implemented")
     }
 
-    override fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
+    override fun getCountryByDeath(): List<CountyEntity> {
         TODO("Not yet implemented")
     }
 
-    override fun getCountryByName(countryName: String): CountyEntity? {
-
-        var countyEntity = countries?.first { it.country == countryName }
-        countyEntity.also { return it }
+    override fun getCountryByRecovered(): List<CountyEntity> {
+        TODO("Not yet implemented")
     }
 
-    override fun getAllHistory(): List<LocalCountryHistory> {
+    fun getOrderedCountry(filter: String): LiveData<List<CountyEntity>> {
+        TODO("Not yet implemented")
+
+    }
+     fun getAllSubscribedCountries(isSubscribed: Boolean): LiveData<List<CountyEntity>> {
+        TODO("Not yet implemented")
+    }
+
+     fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+
+     override fun getCountryByName(countryName: String): LiveData<CountyEntity>? {
+        TODO("Not yet implemented")
+    }
+
+     override fun getAllHistory(): List<LocalCountryHistory> {
         history?.also { return it }
         return  emptyList()
     }
