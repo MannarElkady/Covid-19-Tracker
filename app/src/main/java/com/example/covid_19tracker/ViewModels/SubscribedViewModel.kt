@@ -7,7 +7,9 @@ import com.example.covid_19tracker.Database.CountyEntity
 import com.example.covid_19tracker.Database.LocalDataSource
 import com.example.covid_19tracker.Network.RemoteDataSource
 import com.example.covid_19tracker.Repository.Repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SubscribedViewModel(application: Application) : AndroidViewModel(application) {
     // TODO: Implement the ViewModel
@@ -25,4 +27,11 @@ class SubscribedViewModel(application: Application) : AndroidViewModel(applicati
         return countriesLiveData
     }
 
+    fun deleteSubscribedCountry(countyEntity: CountyEntity){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                covidRepo.updateSubscribedCountry(countyEntity.country, false)
+            }
+        }
+    }
 }

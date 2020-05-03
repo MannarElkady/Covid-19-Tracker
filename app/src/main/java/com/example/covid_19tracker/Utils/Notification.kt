@@ -17,7 +17,7 @@ object Covid_19Notification {
             .setSmallIcon(R.drawable.bell_ring)
             .setContentTitle(title)
             .setContentText(message)
-            .setStyle(NotificationCompat.BigTextStyle())
+            .setStyle(NotificationCompat.BigTextStyle().bigText("Check Application, New Data is Available Now! "))
             .setPriority(NotificationCompat.PRIORITY_HIGH).setVibrate(longArrayOf(1000,1000,1000,1000,1000)).setSound(
                 Settings.System.DEFAULT_NOTIFICATION_URI)
         builder.setDefaults(Notification.DEFAULT_SOUND)
