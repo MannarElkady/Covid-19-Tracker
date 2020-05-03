@@ -7,102 +7,90 @@
     android:background="@color/applicationBackgroundColor"
     tools:context=".UI.Fragments.CountryDetailsFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="5">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:background="@drawable/background_det"
-            android:padding="16dp"
-            android:orientation="horizontal">
-            <!--            <androidx.appcompat.widget.AppCompatImageView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_marginLeft="15dp"-->
-            <!--                android:layout_gravity="bottom"-->
-            <!--                android:layou45t_height="wrap_content"-->
-            <!--                android:src="@drawable/sick_person" />-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="0dp"
-                android:layout_weight="1">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/background_det"/>
+        <com.github.ivbaranov.mfb.MaterialFavoriteButton
+            android:id="@+id/subscribeButton"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/dateTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mfb_animate_favorite="true"
+            app:mfb_favorite_image="@drawable/blue_selected_grim_ripper"
+            app:mfb_not_favorite_image="@drawable/ic_grim_unselected"
+            app:mfb_rotation_duration="400"
+            app:mfb_rotation_angle="180"
+            app:mfb_bounce_duration="1000"
+            app:mfb_color="black"
+            app:mfb_size="75"
+            app:mfb_type="heart"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:textColor="@color/whiteColor"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="46dp"/>
 
-                <com.github.ivbaranov.mfb.MaterialFavoriteButton
-                    android:id="@+id/subscribeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="46dp"
-                    android:layout_marginEnd="46dp"
-                    app:mfb_animate_favorite="true"
-                    app:mfb_favorite_image="@drawable/blue_selected_grim_ripper"
-                    app:mfb_not_favorite_image="@drawable/ic_grim_unselected"
-                    app:mfb_rotation_duration="400"
-                    app:mfb_rotation_angle="360"
-                    app:mfb_bounce_duration="300"
-                    app:mfb_color="black"
-                    app:mfb_size="75"
-                    app:mfb_type="heart"
-                    android:textColor="@color/whiteColor"
-                    app:layout_constraintBottom_toTopOf="@+id/dateTimeTextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/dateTimeTextView"
+            android:padding="2dp"
+            style="@style/smallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/whiteColor"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@+id/subscribeButton"
+            app:layout_constraintBottom_toTopOf="@+id/casesTodayTextView"
+            app:layout_constraintEnd_toEndOf="@id/subscribeButton" />
 
-                <TextView
-                    android:id="@+id/dateTimeTextView"
-                    style="@style/smallText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="46dp"
-                    android:text="TextView"
-                    android:textColor="@color/whiteColor"
-                    app:layout_constraintTop_toBottomOf="@+id/subscribeButton"
-                    app:layout_constraintBottom_toTopOf="@+id/casesTodayTextView"
-                    app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/deathTodayTextView"
+            android:padding="2dp"
+            style="@style/informText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryTextColor"
+            app:layout_constraintBottom_toTopOf="@id/casesCard"
+            app:layout_constraintStart_toStartOf="@id/dateTimeTextView"
+            app:layout_constraintTop_toBottomOf="@+id/casesTodayTextView" />
 
-                <TextView
-                    android:id="@+id/deathTodayTextView"
-                    style="@style/informText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="46dp"
-                    android:layout_marginBottom="46dp"
-                    android:text="TextView"
-                    android:textAlignment="center"
-                    android:textColor="@color/secondaryTextColor"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/casesTodayTextView" />
-
-                <TextView
-                    android:id="@+id/casesTodayTextView"
-                    style="@style/informText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="46dp"
-                    android:text="TextView"
-                    android:textAlignment="center"
-                    android:textColor="@color/whiteColor"
-                    app:layout_constraintBottom_toTopOf="@+id/deathTodayTextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/dateTimeTextView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/casesTodayTextView"
+            style="@style/informText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:padding="2dp"
+            android:textAlignment="center"
+            android:textColor="@color/whiteColor"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@+id/deathTodayTextView"
+            app:layout_constraintStart_toStartOf="@id/dateTimeTextView"
+            app:layout_constraintTop_toBottomOf="@id/dateTimeTextView" />
 
         <io.armcha.elasticview.ElasticView
             android:id="@+id/casesCard"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@id/deathTodayTextView"
+            app:layout_constraintBottom_toTopOf="@id/deathCard"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintVertical_weight="1"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
             android:background="@color/secondaryTextColor"
             app:cardBackgroundColor="@color/whiteColor"
             app:cardCornerRadius="10dp"
@@ -148,8 +136,15 @@
             android:id="@+id/deathCard"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@id/casesCard"
+            app:layout_constraintBottom_toTopOf="@id/recoveredCard"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:cardBackgroundColor="@color/whiteColor"
             app:cardCornerRadius="10dp"
             app:cardElevation="15dp">
@@ -194,10 +189,17 @@
             android:id="@+id/recoveredCard"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
             android:background="@color/primaryLightColor"
             app:cardBackgroundColor="@color/whiteColor"
+            app:layout_constraintTop_toBottomOf="@id/deathCard"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:cardCornerRadius="10dp"
             app:cardElevation="15dp">
 
@@ -236,5 +238,5 @@
                 </LinearLayout>
             </LinearLayout>
         </io.armcha.elasticview.ElasticView>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
