@@ -39,6 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:divider="@drawable/subscribe_item_divider"
+        app:swiped_item_opacity_fades_on_swiping="true"
+        app:behind_swiped_item_bg_color_secondary="@color/primaryDarkColor"
+        app:behind_swiped_item_bg_color="@color/secondaryTextColor"
         app:item_layout="@layout/subscribe_item_recycle"/>
 
 </FrameLayout>

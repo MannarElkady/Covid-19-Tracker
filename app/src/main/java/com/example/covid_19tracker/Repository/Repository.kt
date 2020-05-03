@@ -15,18 +15,9 @@ class Repository(
     val countries: LiveData<List<CountyEntity>>
         get() = localDataSource.getAllCountry()
 
-    override fun refreshCountries() {
-        runBlocking {
-            withContext(ioDispatcher) {
-                val countries = remoteDataSource.getCountriesData()
-                localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
-                countries.forEach {
-                    val countryHistory = remoteDataSource.getCountryHistory(it.country)
-                    localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
-                }
-            }
-        }
-
+    override suspend fun refreshCountries() {
+        val countries = remoteDataSource.getCountriesData()
+        localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
     }
     override suspend fun getCountryData(countryName: String):LiveData<CountyEntity>?{
         return localDataSource.getCountryByName(countryName)
@@ -42,12 +33,12 @@ class Repository(
 
 
     override fun getCountryHistory(countryName: String):LiveData<LocalCountryHistory> {
-         /*runBlocking {
+         runBlocking {
              withContext(ioDispatcher) {
                  val countryHistory = remoteDataSource.getCountryHistory(countryName)
                  localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
              }
-         }*/
+         }
          return localDataSource.geCountryHistory(countryName)
     }
     //For test Repository not form production

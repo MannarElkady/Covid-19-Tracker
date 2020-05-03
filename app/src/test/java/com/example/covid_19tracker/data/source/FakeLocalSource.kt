@@ -26,6 +26,14 @@ class FakeLocalSource(
         TODO("Not yet implemented")
     }
 
+    override fun getAllSubscribedCountries(isSubscribed: Boolean): LiveData<List<CountyEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override fun getCountryByName(countryName: String): CountyEntity? {
 
         var countyEntity = countries?.first { it.country == countryName }
