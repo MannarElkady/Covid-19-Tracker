@@ -34,11 +34,17 @@
         android:textAlignment="center"
         android:textColor="#6A6969" />
 </RelativeLayout>
+
     <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:behind_swiped_item_bg_color="@color/secondaryTextColor"
+        app:behind_swiped_item_bg_color_secondary="#34C360"
+        app:behind_swiped_item_icon="@drawable/recycle"
+        app:behind_swiped_item_icon_margin="8dp"
+        app:behind_swiped_item_icon_secondary="@drawable/navigate"
         app:divider="@drawable/subscribe_item_divider"
-        app:item_layout="@layout/subscribe_item_recycle"/>
-
+        app:item_layout="@layout/subscribe_item_recycle"
+        app:swiped_item_opacity_fades_on_swiping="true" />
 </FrameLayout>
