@@ -1,11 +1,8 @@
 package com.example.covid_19tracker.data.source
 
-import androidx.lifecycle.LiveData
-import com.example.covid_19tracker.Database.LocalCountryHistory
-import com.example.covid_19tracker.Database.LocalHistory
-import com.example.covid_19tracker.Network.*
-import com.example.covid_19tracker.Repository.Repository
-import com.example.covid_19tracker.Repository.RepositoryContract
+import com.example.covid_19tracker.network.*
+import com.example.covid_19tracker.repository.Repository
+import com.example.covid_19tracker.repository.RepositoryContract
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.core.IsEqual
@@ -43,141 +40,141 @@ class RepositoryTest {
         assertThat(historyList.size, IsEqual(remoteDataSource.history.size+1))
     }
 
-    fun createMockData(): List<CountryHistory> {
-        return listOf(
-            CountryHistory(
-                country = "Afghanistan", timeline = History(
-                    cases = mapOf<String, Long>(
-                        "3/31/20" to 174,
-                        "4/1/20" to 237,
-                        "4/2/20" to 273,
-                        "4/3/20" to 281,
-                        "4/4/20" to 299,
-                        "4/5/20" to 349,
-                        "4/6/20" to 367,
-                        "4/7/20" to 423,
-                        "4/8/20" to 444,
-                        "4/9/20" to 484,
-                        "4/10/20" to 521,
-                        "4/11/20" to 555,
-                        "4/12/20" to 607,
-                        "4/13/20" to 665,
-                        "4/14/20" to 714,
-                        "4/15/20" to 784
-                    ), deaths = mapOf<String, Long>(
-                        "3/31/20" to 174,
-                        "4/1/20" to 237,
-                        "4/2/20" to 273,
-                        "4/3/20" to 281,
-                        "4/4/20" to 299,
-                        "4/5/20" to 349,
-                        "4/6/20" to 367,
-                        "4/7/20" to 423,
-                        "4/8/20" to 444
-                    ), recovered = mapOf<String, Long>(
-                        "3/31/20" to 174,
-                        "4/1/20" to 237,
-                        "4/2/20" to 273,
-                        "4/3/20" to 281,
-                        "4/4/20" to 299,
-                        "4/5/20" to 349,
-                        "4/6/20" to 367,
-                        "4/7/20" to 423,
-                        "4/8/20" to 444
-                    )
-                ), provinces = listOf("one", "two", "three")
-            ), CountryHistory(
-                country = "USA", timeline = History(
-                    cases = mapOf<String, Long>(
-                        "3/31/20" to 174,
-                        "4/1/20" to 237,
-                        "4/2/20" to 273,
-                        "4/3/20" to 281,
-                        "4/4/20" to 299,
-                        "4/5/20" to 349,
-                        "4/6/20" to 367,
-                        "4/7/20" to 423,
-                        "4/8/20" to 444,
-                        "4/9/20" to 484,
-                        "4/10/20" to 521,
-                        "4/11/20" to 555,
-                        "4/12/20" to 607,
-                        "4/13/20" to 665,
-                        "4/14/20" to 714,
-                        "4/15/20" to 784
-                    ), deaths = mapOf<String, Long>(
-                        "3/31/20" to 174,
-                        "4/1/20" to 237,
-                        "4/2/20" to 273,
-                        "4/3/20" to 281,
-                        "4/4/20" to 299,
-                        "4/5/20" to 349,
-                        "4/6/20" to 367,
-                        "4/7/20" to 423,
-                        "4/8/20" to 444
-                    ), recovered = mapOf<String, Long>(
-                        "3/31/20" to 174,
-                        "4/1/20" to 237,
-                        "4/2/20" to 273,
-                        "4/3/20" to 281,
-                        "4/4/20" to 299,
-                        "4/5/20" to 349,
-                        "4/6/20" to 367,
-                        "4/7/20" to 423,
-                        "4/8/20" to 444
-                    )
-                ), provinces = listOf("one", "two", "three")
-            )
-        )
-    }
 
-    fun createMockCountry(): List<CountryData> {
-        return listOf(
-            CountryData(
-                country = "USA",
-                countryInfo = CountryInfo(
-                    _id = 4,
-                    iso2 = "AF",
-                    iso3 = "AFG",
-                    lat = 33.0,
-                    long = 65.0,
-                    flag = "https://corona.lmao.ninja/assets/img/flags/af.png"
+}
+fun createMockData(): List<CountryHistory> {
+    return listOf(
+        CountryHistory(
+            country = "Afghanistan", timeline = History(
+                cases = mapOf<String, Long>(
+                    "3/31/20" to 174,
+                    "4/1/20" to 237,
+                    "4/2/20" to 273,
+                    "4/3/20" to 281,
+                    "4/4/20" to 299,
+                    "4/5/20" to 349,
+                    "4/6/20" to 367,
+                    "4/7/20" to 423,
+                    "4/8/20" to 444,
+                    "4/9/20" to 484,
+                    "4/10/20" to 521,
+                    "4/11/20" to 555,
+                    "4/12/20" to 607,
+                    "4/13/20" to 665,
+                    "4/14/20" to 714,
+                    "4/15/20" to 784
+                ), deaths = mapOf<String, Long>(
+                    "3/31/20" to 174,
+                    "4/1/20" to 237,
+                    "4/2/20" to 273,
+                    "4/3/20" to 281,
+                    "4/4/20" to 299,
+                    "4/5/20" to 349,
+                    "4/6/20" to 367,
+                    "4/7/20" to 423,
+                    "4/8/20" to 444
+                ), recovered = mapOf<String, Long>(
+                    "3/31/20" to 174,
+                    "4/1/20" to 237,
+                    "4/2/20" to 273,
+                    "4/3/20" to 281,
+                    "4/4/20" to 299,
+                    "4/5/20" to 349,
+                    "4/6/20" to 367,
+                    "4/7/20" to 423,
+                    "4/8/20" to 444
                 )
-                , cases = 2171,
-                todayCases = 232,
-                deaths = 64,
-                todayDeaths = 4,
-                recovered = 260,
-                active = 1847,
-                critical = 7,
-                casesPerOneMillion = 56,
-                deathsPerOneMillion = 2,
-                updated = 1588287677285
-
-            ), CountryData(
-                country = "Afghanistan",
-                countryInfo = CountryInfo(
-                    _id = 5,
-                    iso2 = "AF",
-                    iso3 = "AFG",
-                    lat = 33.0,
-                    long = 65.0,
-                    flag = "https://corona.lmao.ninja/assets/img/flags/af.png"
+            ), provinces = listOf("one", "two", "three")
+        ), CountryHistory(
+            country = "USA", timeline = History(
+                cases = mapOf<String, Long>(
+                    "3/31/20" to 174,
+                    "4/1/20" to 237,
+                    "4/2/20" to 273,
+                    "4/3/20" to 281,
+                    "4/4/20" to 299,
+                    "4/5/20" to 349,
+                    "4/6/20" to 367,
+                    "4/7/20" to 423,
+                    "4/8/20" to 444,
+                    "4/9/20" to 484,
+                    "4/10/20" to 521,
+                    "4/11/20" to 555,
+                    "4/12/20" to 607,
+                    "4/13/20" to 665,
+                    "4/14/20" to 714,
+                    "4/15/20" to 784
+                ), deaths = mapOf<String, Long>(
+                    "3/31/20" to 174,
+                    "4/1/20" to 237,
+                    "4/2/20" to 273,
+                    "4/3/20" to 281,
+                    "4/4/20" to 299,
+                    "4/5/20" to 349,
+                    "4/6/20" to 367,
+                    "4/7/20" to 423,
+                    "4/8/20" to 444
+                ), recovered = mapOf<String, Long>(
+                    "3/31/20" to 174,
+                    "4/1/20" to 237,
+                    "4/2/20" to 273,
+                    "4/3/20" to 281,
+                    "4/4/20" to 299,
+                    "4/5/20" to 349,
+                    "4/6/20" to 367,
+                    "4/7/20" to 423,
+                    "4/8/20" to 444
                 )
-                , cases = 2171,
-                todayCases = 232,
-                deaths = 64,
-                todayDeaths = 4,
-                recovered = 260,
-                active = 1847,
-                critical = 7,
-                casesPerOneMillion = 56,
-                deathsPerOneMillion = 2,
-                updated = 1588287677285
-
-            )
+            ), provinces = listOf("one", "two", "three")
         )
+    )
+}
 
-    }
+fun createMockCountry(): List<CountryData> {
+    return listOf(
+        CountryData(
+            country = "USA",
+            countryInfo = CountryInfo(
+                _id = 4,
+                iso2 = "AF",
+                iso3 = "AFG",
+                lat = 33.0,
+                long = 65.0,
+                flag = "https://corona.lmao.ninja/assets/img/flags/af.png"
+            )
+            , cases = 2171,
+            todayCases = 232,
+            deaths = 64,
+            todayDeaths = 4,
+            recovered = 260,
+            active = 1847,
+            critical = 7,
+            casesPerOneMillion = 56,
+            deathsPerOneMillion = 2,
+            updated = 1588287677285
+
+        ), CountryData(
+            country = "Afghanistan",
+            countryInfo = CountryInfo(
+                _id = 5,
+                iso2 = "AF",
+                iso3 = "AFG",
+                lat = 33.0,
+                long = 65.0,
+                flag = "https://corona.lmao.ninja/assets/img/flags/af.png"
+            )
+            , cases = 8000,
+            todayCases = 232,
+            deaths = 64,
+            todayDeaths = 4,
+            recovered = 260,
+            active = 1847,
+            critical = 7,
+            casesPerOneMillion = 56,
+            deathsPerOneMillion = 2,
+            updated = 1588287677285
+
+        )
+    )
 
 }

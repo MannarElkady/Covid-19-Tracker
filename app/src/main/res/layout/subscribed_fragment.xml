@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/subscripe_background"
-    tools:context=".UI.Fragments.SubscribedFragment">
+    tools:context=".ui.fragments.SubscribedFragment">
 
     <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
         android:id="@+id/recycle_view"

@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/applicationBackgroundColor"
-    tools:context=".UI.Fragments.HomeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
 
-    <TextView
-        android:id="@+id/clickMeText"
+        <variable
+            name="viewModel"
+            type="com.example.covid_19tracker.viewModels.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home" />
+        android:background="@color/applicationBackgroundColor"
+        tools:context=".ui.fragments.HomeFragment">
 
-</FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/card_view_outer"
+            android:layout_width="411dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view_inner"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                card_view:cardBackgroundColor="@color/primaryColor"
+                card_view:cardCornerRadius="25dp"
+                card_view:cardElevation="0dp">
+
+                <include layout="@layout/hot_line_call" />
+            </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/horizontal_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/country_list"
+            app:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
+            card_view:layout_constraintTop_toBottomOf="@+id/card_view_outer">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filter_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                app:singleLine="true"
+                app:singleSelection="true" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/country_list"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:listData="@{viewModel.countryList}"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/horizontal_scroll"
+            tools:listitem="@layout/country_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">Covid-19 Tracker</string>
     <!--Ahmed-->
+    <string name="cases">Total cases: %d</string>
+    <string name="death">Total death: %d</string>
+    <string name="call_now">Call Now</string>
+    <string name="recovered">Total recovery: %d</string>
+    <string name="advice_title">Are felling Sick ?</string>
+    <string name="advice_body">If you feel sick with any of covid-19 symptoms call this number immediately for help </string>
+    <string name="show_more">Show More</string>
+    <string-array name="order_list">
+        <item>cases</item>
+        <item>death</item>
+        <item>recovered</item>
+    </string-array>
     <!--Ahmed-->
     <!--Manar-->
     <string name="Setting">Setting</string>
@@ -8,6 +20,5 @@
     <string name="Home">State</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--Manar-->
 </resources>

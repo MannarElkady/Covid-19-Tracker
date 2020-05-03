@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Ahmed-->
+    <string name="cases">%1$s : الحالات</string>
+    <string name="death">%1$s : الوفيات</string>
+    <string name="recovered">%1$s : الحالات المعافاة</string>
+    <string name="call_now">اتصل الان</string>
+    <string name="advice_body">إذا شعرت بالمرض مع أي من أعراض كرونا ، اتصل بهذا الرقم على الفور للمساعدة</string>
+    <string name="advice_title">هل تشعر بالمرض ؟</string>
+
+    <string-array name="order_list">
+        <item>االحالات</item>
+        <item>عدد الوفيات</item>
+        <item>عدد الحالات المعافاة</item>
+    </string-array>
     <!--Ahmed-->
     <!--Manar-->
     <string name="Setting">الأعدادات</string>
     <string name="Subscribed">المتابعات</string>
     <string name="Home">الحالة العامة</string>
+    <string name="show_more">المزيد</string>
+
     <!--Manar-->
 </resources>

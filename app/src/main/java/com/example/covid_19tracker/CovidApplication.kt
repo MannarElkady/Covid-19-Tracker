@@ -5,8 +5,9 @@ import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.example.covid_19tracker.Repository.Repository
-import com.example.covid_19tracker.WorkManager.RefreshWorkManager
+import com.example.covid_19tracker.repository.Repository
+import com.example.covid_19tracker.repository.RepositoryContract
+import com.example.covid_19tracker.workManager.RefreshWorkManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class CovidApplication:Application() {
-    val repository: Repository
+    val repository: RepositoryContract
         get() = ServiceLocator.provideRepository(this)
 
     private val appScope =  CoroutineScope(Dispatchers.Default)
