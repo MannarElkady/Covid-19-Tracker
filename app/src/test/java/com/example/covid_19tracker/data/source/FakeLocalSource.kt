@@ -26,16 +26,36 @@ class FakeLocalSource(
         TODO("Not yet implemented")
     }
 
-    override fun getOrderedCountry(filter: String): LiveData<List<CountyEntity>> {
-        TODO("Not yet implemented")
-
-    }
-
-    override fun getCountryByName(countryName: String): LiveData<CountyEntity>? {
+    override fun getCountryByCases(): LiveData<List<CountyEntity>> {
         TODO("Not yet implemented")
     }
 
-    override fun getAllHistory(): List<LocalCountryHistory> {
+    override fun getCountryByDeath(): List<CountyEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCountryByRecovered(): List<CountyEntity> {
+        TODO("Not yet implemented")
+    }
+
+    fun getOrderedCountry(filter: String): LiveData<List<CountyEntity>> {
+        TODO("Not yet implemented")
+
+    }
+     fun getAllSubscribedCountries(isSubscribed: Boolean): LiveData<List<CountyEntity>> {
+        TODO("Not yet implemented")
+    }
+
+     fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+
+     override fun getCountryByName(countryName: String): LiveData<CountyEntity>? {
+        TODO("Not yet implemented")
+    }
+
+     override fun getAllHistory(): List<LocalCountryHistory> {
         history?.also { return it }
         return  emptyList()
     }

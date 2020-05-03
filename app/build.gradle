@@ -133,6 +133,7 @@ dependencies {
 
     //DragDropSwipeRecycleView
     implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.6.0'
-
+    //subscribe Button
+    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
     /*Manar*/
 }

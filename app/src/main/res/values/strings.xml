@@ -18,7 +18,9 @@
     <string name="Setting">Setting</string>
     <string name="Subscribed">Subscribed</string>
     <string name="Home">State</string>
-
+    <string name="ApplicationChannelName">Covid_19 Tracker</string>
+    <string name="ApplicationChannelDescription">Covid_19 Tracker Notfications Channel</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="No_SubScribed_String">No Subscription Yet.. Go to Home Screen and Select a country to subscribe</string>
     <!--Manar-->
 </resources>

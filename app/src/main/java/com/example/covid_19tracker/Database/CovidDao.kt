@@ -35,4 +35,6 @@ interface CovidDao {
 
     @Query("SELECT * FROM country_history")
     fun getAllHistory(): List<LocalCountryHistory>
+    @Query("UPDATE country SET isSubscribed = :isSubscribed WHERE country = :countryName")
+    fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean)
 }

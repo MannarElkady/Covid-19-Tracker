@@ -58,4 +58,7 @@ class Repository(
             it.asCountryModelList()
         }
     }
+     fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
+        localDataSource.updateSubscribedCountry(countryName,isSubscribed)
+    }
 }

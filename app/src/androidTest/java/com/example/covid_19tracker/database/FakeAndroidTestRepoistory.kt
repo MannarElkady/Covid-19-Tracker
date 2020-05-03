@@ -34,7 +34,11 @@ class FakeAndroidTestRepoistory:RepositoryContract {
         return MutableLiveData(countryServiceData[countryName])
     }
 
-    override fun orderList(order: String) {
+    override fun orderList() {
+        TODO("Not yet implemented")
+    }
+
+     fun orderList(order: String) {
         _countryList.value?.sortedBy { countryModel -> countryModel.cases }
     }
 

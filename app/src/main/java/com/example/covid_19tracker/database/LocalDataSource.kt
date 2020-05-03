@@ -46,4 +46,7 @@ class LocalDataSource(context: Context) : CovidDao {
     override fun getAllHistory(): List<LocalCountryHistory> {
         return dao.getAllHistory()
     }
+    override fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
+        return dao.updateSubscribedCountry(countryName,isSubscribed)
+    }
 }

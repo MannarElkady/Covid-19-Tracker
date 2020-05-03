@@ -1,12 +1,15 @@
 package com.example.covid_19tracker.database
 
+import androidx.annotation.Keep
 import androidx.room.*
 import com.example.covid_19tracker.network.moshi
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Types
 import org.json.JSONObject
+import java.io.Serializable
 
 @Entity(tableName = "country")
+@Keep
 data class CountyEntity(
     @PrimaryKey
     val country: String,
@@ -22,9 +25,11 @@ data class CountyEntity(
     , val casesPerOneMillion: Long
     , val deathsPerOneMillion: Long
     , val updated: Long
-)
+    , val isSubscribed : Boolean = false
+) : Serializable
 
 @Entity(tableName = "country_info")
+@Keep
 data class LocalCountryInfo(
     @PrimaryKey(autoGenerate = true)
      var id: Int = 0
@@ -37,15 +42,17 @@ data class LocalCountryInfo(
 
 
 @Entity(tableName = "country_history")
+@Keep
 data class LocalCountryHistory(
     @PrimaryKey
     val country: String
     , val provinces: List<String>?,
     @Embedded
     val timeline: LocalHistory
-)
+): Serializable
 
 @Entity(tableName = "history")
+@Keep
 data class LocalHistory(
     @PrimaryKey(autoGenerate = true)
     var id :Int = 0,
@@ -53,7 +60,7 @@ data class LocalHistory(
     , val deaths: Map<String, Long>
     , val recovered: Map<String, Long>
 
-)
+): Serializable
 
 class MapConverter {
     @TypeConverter
@@ -70,7 +77,6 @@ class MapConverter {
 }
 
 class ListConverter{
-
     @TypeConverter
     fun restoreList(listOfString: String): List<String>? {
         val type = Types.newParameterizedType(List::class.java, String::class.java)
