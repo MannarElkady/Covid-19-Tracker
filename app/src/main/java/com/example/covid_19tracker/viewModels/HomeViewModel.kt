@@ -46,9 +46,9 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
     fun onFilterChanged(order: Int, isChecked: Boolean) {
         Timber.d(isChecked.toString())
         if (this.filter.update(order, isChecked)) {
-            this.repository.orderList()
-            Timber.v(countryList.value?.get(0)?.cases.toString())
-
+            viewModelScope.launch {
+              //  repository.orderList(order)
+            }
         }
     }
 

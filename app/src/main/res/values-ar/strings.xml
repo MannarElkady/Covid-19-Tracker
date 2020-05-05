@@ -3,11 +3,14 @@
     <!--Ahmed-->
     <string name="cases">%1$s : الحالات</string>
     <string name="death">%1$s : الوفيات</string>
-    <string name="recovered">%1$s : الحالات المعافاة</string>
+    <string name="recovered">%1$s :  المعافاة</string>
     <string name="call_now">اتصل الان</string>
     <string name="advice_body">إذا شعرت بالمرض مع أي من أعراض كرونا ، اتصل بهذا الرقم على الفور للمساعدة</string>
     <string name="advice_title">هل تشعر بالمرض ؟</string>
-
+    <string name="stay_home">الزم بيتك لأطول فترة ممكنة</string>
+    <string name="keep_distance">حافظ على مسافة آمنة من الآخرين</string>
+    <string name="wash_hand">اغسل يديك بشكل منتظم</string>
+    <string name="cover_mouth">غط فمك وأنفك عندما تسعل</string>
     <string-array name="order_list">
         <item>االحالات</item>
         <item>عدد الوفيات</item>

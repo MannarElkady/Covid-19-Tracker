@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,7 +38,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Get a reference to the binding object and inflate the fragment views.
-         binding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.home_fragment, container, false
         )
         binding.viewModel = viewModel
@@ -45,15 +46,12 @@ class HomeFragment : Fragment() {
         val adapter =
             CountryAdapter(CountryListener { countryName -> viewModel.onCountryClicked(countryName) })
         binding.countryList.adapter = adapter
-        viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer{
-            val action =HomeFragmentDirections.actionHomeFragmentToCountryDetails()
-            findNavController().navigate(action)
-            viewModel.doneNavigating()
+        viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer {
+//            val action =HomeFragmentDirections.actionHomeFragmentToCountryDetails()
+//            findNavController().navigate(action)
+//            viewModel.doneNavigating()
         })
         initChipGroup()
-        viewModel.countryList.observe(viewLifecycleOwner, Observer {
-            Timber.v(it[0].cases.toString())
-        })
         return binding.root
     }
 
@@ -61,10 +59,15 @@ class HomeFragment : Fragment() {
         val chipGroup = binding.filterList
         val inflator = LayoutInflater.from(chipGroup.context)
         val orderList = resources.getStringArray(R.array.order_list)
-        val children = orderList.mapIndexed {index, filterName ->
+        val children = orderList.mapIndexed { index, filterName ->
             val chip = inflator.inflate(R.layout.filter, chipGroup, false) as Chip
             chip.text = filterName
             chip.tag = index
+            chip.chipIcon = when (index) {
+                0 -> ResourcesCompat.getDrawable(resources, R.drawable.ic_covid, null)
+                1 -> ResourcesCompat.getDrawable(resources, R.drawable.ic_death, null)
+                else -> ResourcesCompat.getDrawable(resources, R.drawable.ic_recovery, null)
+            }
             chip.setOnCheckedChangeListener { button, isChecked ->
                 viewModel.onFilterChanged(button.tag as Int, isChecked)
             }
@@ -77,7 +80,6 @@ class HomeFragment : Fragment() {
             chipGroup.addView(chip)
         }
     }
-
 
 }
 
