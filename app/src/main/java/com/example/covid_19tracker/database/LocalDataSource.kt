@@ -18,8 +18,24 @@ class LocalDataSource(context: Context) : CovidDao {
         dao.insertCountryHistory(countryHistory)
     }
 
+    override fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed) {
+        dao.insertContrySubscribed(countryEntitySubscribed)
+    }
+
+    override fun deleteCountrySubscribed(countryEntitySubscribed: CountryEntitySubscribed) {
+        dao.deleteCountrySubscribed(countryEntitySubscribed)
+    }
+
+    override fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>> {
+        return dao.getAllCoutrySubscribed()
+    }
+
     override fun getAllCountry(): LiveData<List<CountyEntity>> {
         return dao.getAllCountry()
+    }
+
+    override fun getCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed> {
+        return dao.getCountrySubscribed(countryName)
     }
 
     override fun geCountryHistory(countryName: String): LiveData<LocalCountryHistory> {
@@ -46,7 +62,6 @@ class LocalDataSource(context: Context) : CovidDao {
     override fun getAllHistory(): List<LocalCountryHistory> {
         return dao.getAllHistory()
     }
-    override fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
-        return dao.updateSubscribedCountry(countryName,isSubscribed)
-    }
+    
+
 }

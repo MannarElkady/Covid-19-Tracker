@@ -25,8 +25,16 @@ data class CountyEntity(
     , val casesPerOneMillion: Long
     , val deathsPerOneMillion: Long
     , val updated: Long
-    , val isSubscribed : Boolean = false
 ) : Serializable
+
+@Entity(tableName = "countrySubscribed")
+@Keep
+data class CountryEntitySubscribed(
+    @PrimaryKey
+    val country: String,
+    val totalCases: Long,
+    val countryThumb: String
+)
 
 @Entity(tableName = "country_info")
 @Keep
