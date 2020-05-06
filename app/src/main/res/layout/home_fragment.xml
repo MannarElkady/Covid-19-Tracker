@@ -2,8 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <data>
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+<data>
 
         <variable
             name="viewModel"
@@ -36,7 +38,8 @@
                 card_view:cardCornerRadius="25dp"
                 card_view:cardElevation="0dp">
 
-                <include layout="@layout/hot_line_call" />
+                <include layout="@layout/hot_line_call"
+                    bind:viewModel="@{viewModel}"/>
             </com.google.android.material.card.MaterialCardView>
         </FrameLayout>
 
@@ -53,7 +56,7 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/filter_list"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 app:singleLine="true"

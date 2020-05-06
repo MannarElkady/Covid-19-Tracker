@@ -6,14 +6,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.repository.RepositoryContract
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
     val countryList = repository.countryList
-
+    private var _callHotLine = MutableLiveData<Boolean>()
+    val callHotline: LiveData<Boolean>
+        get() = _callHotLine
     private var _navigateToDetails = MutableLiveData<CountryModel>()
     private var filter = FilterHolder()
+    private var _orderedList = MutableLiveData<List<CountryModel>>()
+
+    val orderdList: LiveData<List<CountryModel>>
+        get() = _orderedList
 
     /**
      * If this is non-null, immediately navigate to [CountryDetailsFragment] and call [doneNavigating]
@@ -48,9 +55,36 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
         Timber.d(isChecked.toString())
         if (this.filter.update(order, isChecked)) {
             viewModelScope.launch {
-              //  repository.orderList(order)
+                when (order) {
+                    0 -> orderListByCase()
+                    1 -> orderListByCase()
+                    else -> orderListByRecovered()
+                }
             }
         }
+    }
+
+    private suspend fun orderListByCase() {
+
+        _orderedList.postValue(countryList.value?.sortedBy { x -> x.cases })
+    }
+
+    private suspend fun orderListByDeath() {
+
+        _orderedList.postValue(countryList.value?.sortedBy { x -> x.deaths })
+    }
+
+    private suspend fun orderListByRecovered() {
+
+        _orderedList.postValue(countryList.value?.sortedBy { x -> x.recovered })
+    }
+
+    fun callHotLine() {
+        _callHotLine.value = true
+    }
+
+    fun finishCall() {
+        _callHotLine.value = null
     }
 
     private class FilterHolder {

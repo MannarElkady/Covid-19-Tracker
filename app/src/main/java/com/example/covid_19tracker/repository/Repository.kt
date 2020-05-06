@@ -55,13 +55,7 @@ class Repository(
         return localDataSource.getAllHistory()
     }
 
-    override fun orderList() {
-        val orderdCountry = localDataSource.getCountryByCases()
-            Timber.v("order")
-        countryList = Transformations.map(orderdCountry) {
-            it.asCountryModelList()
-        }
-    }
+
      fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
         localDataSource.updateSubscribedCountry(countryName,isSubscribed)
     }
