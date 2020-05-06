@@ -26,7 +26,6 @@ class Repository(
     override suspend fun refreshCountries(){
         withContext(Dispatchers.IO) {
             val countries = remoteDataSource.getCountriesData()
-            val subscribedCountries= localDataSource.getAllCoutrySubscribed()
             localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
         }
     }
@@ -87,7 +86,5 @@ class Repository(
     }
 
 
-     fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean) {
-        localDataSource.updateSubscribedCountry(countryName,isSubscribed)
-    }
+
 }

@@ -66,8 +66,9 @@ class HomeFragment : Fragment() {
         })
         viewModel.orderdList.observe(viewLifecycleOwner, Observer {
             it?.let{
+
                 adapter.submitList(it)
-                
+                binding.countryList.scrollToPosition(0)
             }
         })
         initChipGroup()

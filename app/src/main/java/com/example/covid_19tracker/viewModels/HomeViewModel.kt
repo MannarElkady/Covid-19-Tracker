@@ -57,26 +57,26 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
             viewModelScope.launch {
                 when (order) {
                     0 -> orderListByCase()
-                    1 -> orderListByCase()
+                    1 -> orderListByDeath()
                     else -> orderListByRecovered()
                 }
             }
         }
     }
 
-    private suspend fun orderListByCase() {
+    private fun orderListByCase() {
 
-        _orderedList.postValue(countryList.value?.sortedBy { x -> x.cases })
+        _orderedList.postValue(countryList.value?.sortedByDescending { x -> x.cases })
     }
 
-    private suspend fun orderListByDeath() {
+    private fun orderListByDeath() {
 
-        _orderedList.postValue(countryList.value?.sortedBy { x -> x.deaths })
+        _orderedList.postValue(countryList.value?.sortedByDescending { x -> x.deaths })
     }
 
-    private suspend fun orderListByRecovered() {
+    private fun orderListByRecovered() {
 
-        _orderedList.postValue(countryList.value?.sortedBy { x -> x.recovered })
+        _orderedList.postValue(countryList.value?.sortedByDescending { x -> x.recovered })
     }
 
     fun callHotLine() {
