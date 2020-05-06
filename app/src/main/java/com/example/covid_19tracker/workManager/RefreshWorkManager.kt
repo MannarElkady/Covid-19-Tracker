@@ -17,7 +17,7 @@ class RefreshWorkManager(val appContext: Context, params: WorkerParameters) : Co
          val repo = (appContext as CovidApplication).repository
          return try {
              Timber.i("Hello From Work Manager")
-             Covid_19Notification.displayApplicationNotification(appContext,CHANNEL_ID,"Hello","Test")
+             //Covid_19Notification.displayApplicationNotification(appContext,CHANNEL_ID,"Hello","Test")
              repo.refreshCountries()
              Result.success()
          } catch (error:Throwable){

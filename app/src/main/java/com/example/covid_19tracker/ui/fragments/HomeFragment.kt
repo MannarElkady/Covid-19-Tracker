@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
         val adapter =
             CountryAdapter(CountryListener { countryName -> viewModel.onCountryClicked(countryName) })
         binding.countryList.adapter = adapter
+
         viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val action = HomeFragmentDirections.actionHomeFragmentToCountryDetails(it)
