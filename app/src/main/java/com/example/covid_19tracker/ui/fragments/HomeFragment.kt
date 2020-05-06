@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,18 +14,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.covid_19tracker.CovidApplication
 import com.example.covid_19tracker.R
-import com.example.covid_19tracker.database.CountyEntity
-import com.example.covid_19tracker.database.LocalCountryInfo
-import com.example.covid_19tracker.repository.Repository
+import com.example.covid_19tracker.databinding.HomeFragmentBinding
+import com.example.covid_19tracker.repository.RepositoryContract
 import com.example.covid_19tracker.ui.adapters.CountryAdapter
 import com.example.covid_19tracker.ui.adapters.CountryListener
 import com.example.covid_19tracker.viewModels.HomeViewModel
-import com.example.covid_19tracker.databinding.HomeFragmentBinding
-import com.example.covid_19tracker.network.CountryInfo
-import com.example.covid_19tracker.repository.RepositoryContract
-import com.example.covid_19tracker.utils.Order
+
 import com.google.android.material.chip.Chip
-import timber.log.Timber
 
 
 class HomeFragment : Fragment() {
@@ -40,7 +36,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Get a reference to the binding object and inflate the fragment views.
-         binding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.home_fragment, container, false
         )
         binding.viewModel = viewModel
@@ -48,18 +44,15 @@ class HomeFragment : Fragment() {
         val adapter =
             CountryAdapter(CountryListener { countryName -> viewModel.onCountryClicked(countryName) })
         binding.countryList.adapter = adapter
-        viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer{
-            val countryEntity = CountyEntity("Manar",
-                LocalCountryInfo(1,"","","",0.0,0.0),3232,453,234,34223,42342,444,44,
-                3942323,333,444)
-            val action = HomeFragmentDirections.actionHomeFragmentToCountryDetails(countryEntity)
-            findNavController().navigate(action)
-            viewModel.doneNavigating()
+
+        viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val action = HomeFragmentDirections.actionHomeFragmentToCountryDetails(it)
+                findNavController().navigate(action)
+                viewModel.doneNavigating()
+            }
         })
         initChipGroup()
-        viewModel.countryList.observe(viewLifecycleOwner, Observer {
-            //Timber.v(it[0].cases.toString())
-        })
         return binding.root
     }
 
@@ -67,10 +60,15 @@ class HomeFragment : Fragment() {
         val chipGroup = binding.filterList
         val inflator = LayoutInflater.from(chipGroup.context)
         val orderList = resources.getStringArray(R.array.order_list)
-        val children = orderList.mapIndexed {index, filterName ->
+        val children = orderList.mapIndexed { index, filterName ->
             val chip = inflator.inflate(R.layout.filter, chipGroup, false) as Chip
             chip.text = filterName
             chip.tag = index
+            chip.chipIcon = when (index) {
+                0 -> ResourcesCompat.getDrawable(resources, R.drawable.ic_covid, null)
+                1 -> ResourcesCompat.getDrawable(resources, R.drawable.ic_death, null)
+                else -> ResourcesCompat.getDrawable(resources, R.drawable.ic_recovery, null)
+            }
             chip.setOnCheckedChangeListener { button, isChecked ->
                 viewModel.onFilterChanged(button.tag as Int, isChecked)
             }
@@ -83,7 +81,6 @@ class HomeFragment : Fragment() {
             chipGroup.addView(chip)
         }
     }
-
 
 }
 

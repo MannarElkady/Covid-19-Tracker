@@ -11,10 +11,11 @@ interface RepositoryContract {
     suspend fun refreshCountries()
     fun getCountryHistory(countryName: String): LiveData<LocalCountryHistory>
     suspend fun getCountryHistroyList(name: String): List<LocalCountryHistory>
-    suspend fun getCountryData(countryName: String): LiveData<CountyEntity>?
+
     fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed)
     fun deleteCountrySubscribed(countryEntitySubscribed: CountryEntitySubscribed)
     fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>>
     fun getCountrySubscribed(countryName: String):LiveData<CountryEntitySubscribed>
+    suspend fun getCountryData(countryName: String): LiveData<CountryModel>?
     fun orderList()
 }

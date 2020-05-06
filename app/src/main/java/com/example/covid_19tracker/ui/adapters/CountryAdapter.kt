@@ -56,7 +56,7 @@ class CountryDiffUtil : DiffUtil.ItemCallback<CountryModel>() {
         return oldItem == newItem
     }
 }
-class CountryListener(val clickListener: (countryName: String) -> Unit) {
-    fun onClick(country: CountryModel) = clickListener(country.country)
+class CountryListener(val clickListener: (country: CountryModel) -> Unit) {
+    fun onClick(country: CountryModel) = clickListener(country)
 }
 

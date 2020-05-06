@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{country.countryInfo.flag}"
+                app:image="@{country.countryInfo.flag}"
                 tools:srcCompat="@drawable/background_det" />
 
             <TextView
@@ -43,43 +43,56 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:weightSum="3">
                 <!-- Title, secondary and supporting text -->
 
-                <TextView
+                <com.google.android.material.chip.Chip
                     android:id="@+id/country_cases"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:gravity="center"
-                    android:text="@{@string/cases(country.cases)}"
+                    android:text="@{Long.toString(country.cases)}"
+                    app:chipIcon="@drawable/ic_covid"
+                    app:chipIconSize="15dp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:chipMinHeight="20dp"
+                    tools:text="500" />
 
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-
-                <TextView
+                <com.google.android.material.chip.Chip
                     android:id="@+id/country_death"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:gravity="center"
-                    android:text="@{@string/death(country.deaths)}"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:text="@{Long.toString(country.deaths)}"
+                    tools:text="5000"
+                    app:chipIcon="@drawable/ic_death"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="15dp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:chipMinHeight="20dp"
+                     />
 
-                <TextView
+                <com.google.android.material.chip.Chip
                     android:id="@+id/country_recoverd"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:gravity="center"
-                    android:text="@{@string/recovered(country.recovered)}"
-
-                    android:textAppearance="?attr/textAppearanceBody2"
+                    tools:text="500"
+                    app:chipMinHeight="20dp"
+                    app:chipIcon="@drawable/ic_recovery"
+                    app:chipIconEnabled="true"
+                    app:chipIconSize="15dp"
+                    android:text="@{Long.toString(country.recovered)}"
                     android:textColor="?android:attr/textColorSecondary" />
-
             </LinearLayout>
 
             <!-- Buttons -->
@@ -92,6 +105,7 @@
                     style="?attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
                     android:visibility="invisible" />
 
                 <com.google.android.material.button.MaterialButton

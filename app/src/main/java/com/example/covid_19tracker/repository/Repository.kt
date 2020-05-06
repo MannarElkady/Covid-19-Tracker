@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import com.example.covid_19tracker.database.*
 import com.example.covid_19tracker.domain.CountryModel
+import com.example.covid_19tracker.domain.asCountryModel
 import com.example.covid_19tracker.domain.asCountryModelList
 import com.example.covid_19tracker.network.*
 import com.example.covid_19tracker.utils.Covid_19Notification
@@ -42,8 +43,12 @@ class Repository(
         }
         return isChanged[0]
     }
-    override suspend fun getCountryData(countryName: String): LiveData<CountyEntity>? {
-        return localDataSource.getCountryByName(countryName)
+
+    override suspend fun getCountryData(countryName: String): LiveData<CountryModel>? {
+        return Transformations.map(localDataSource.getCountryByName(countryName)) {
+            it.asCountryModel()
+        }
+
     }
 
     override fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed) {

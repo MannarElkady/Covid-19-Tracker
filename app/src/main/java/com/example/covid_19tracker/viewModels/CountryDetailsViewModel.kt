@@ -6,8 +6,10 @@ import androidx.lifecycle.*
 import com.example.covid_19tracker.CovidApplication
 import com.example.covid_19tracker.database.CountryEntitySubscribed
 import com.example.covid_19tracker.database.CountyEntity
+
 import com.example.covid_19tracker.database.LocalCountryHistory
 import com.example.covid_19tracker.database.LocalDataSource
+import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.network.RemoteDataSource
 import com.example.covid_19tracker.repository.Repository
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +22,7 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
     private var countryHistoryLiveData: LiveData<LocalCountryHistory>
    // private var countryEntityLiveData : LiveData<CountyEntity>?
     private var countryEntity: CountyEntity? = null
+
 
 
     init {
@@ -59,7 +62,15 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
             }
         }
         return countrySubscribed
+
+    fun updateCountrySubscribe(CountryModel: CountryModel, checkState: Boolean){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                covidRepo.updateSubscribedCountry(CountryModel.country, checkState)
+            }
+        }
     }
+  
 
     fun deleteSubscribedCountry(countyEntity: CountyEntity){
         viewModelScope.launch {

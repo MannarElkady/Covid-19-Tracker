@@ -4,21 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.repository.RepositoryContract
-import com.example.covid_19tracker.utils.Order
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
     val countryList = repository.countryList
 
-    private var _navigateToDetails = MutableLiveData<String>()
+    private var _navigateToDetails = MutableLiveData<CountryModel>()
     private var filter = FilterHolder()
 
     /**
      * If this is non-null, immediately navigate to [CountryDetailsFragment] and call [doneNavigating]
      */
-    val navigateToCountryDetails: LiveData<String>
+    val navigateToCountryDetails: LiveData<CountryModel>
         get() = _navigateToDetails
 
 
@@ -39,16 +39,17 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
         _navigateToDetails.value = null
     }
 
-    fun onCountryClicked(countryName: String) {
-        _navigateToDetails.value = countryName
+    fun onCountryClicked(country: CountryModel) {
+        Timber.d(country.toString())
+        _navigateToDetails.value = country
     }
 
     fun onFilterChanged(order: Int, isChecked: Boolean) {
         Timber.d(isChecked.toString())
         if (this.filter.update(order, isChecked)) {
-            this.repository.orderList()
-            Timber.v(countryList.value?.get(0)?.cases.toString())
-
+            viewModelScope.launch {
+              //  repository.orderList(order)
+            }
         }
     }
 
