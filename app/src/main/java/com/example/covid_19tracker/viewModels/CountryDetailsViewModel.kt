@@ -5,7 +5,6 @@ import android.text.BoringLayout
 import androidx.lifecycle.*
 import com.example.covid_19tracker.CovidApplication
 import com.example.covid_19tracker.database.CountryEntitySubscribed
-import com.example.covid_19tracker.database.CountyEntity
 
 import com.example.covid_19tracker.database.LocalCountryHistory
 import com.example.covid_19tracker.database.LocalDataSource
@@ -21,7 +20,7 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
     private val covidRepo :Repository
     private var countryHistoryLiveData: LiveData<LocalCountryHistory>
    // private var countryEntityLiveData : LiveData<CountyEntity>?
-    private var countryEntity: CountyEntity? = null
+    private var countryEntity: CountryModel? = null
 
 
 
@@ -35,9 +34,9 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
         }
     }
 
-    public fun setCountryEntity(countyEntity: CountyEntity){
-        countryEntity?.let {
-            this.countryEntity = countryEntity
+    public fun setCountryEntity(country: CountryModel){
+        country.let {
+            this.countryEntity = it
         }
     }
 
@@ -45,7 +44,7 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
         return countryHistoryLiveData
     }
 
-    fun addCountrySubscribed(countyEntity: CountyEntity){
+    fun addCountrySubscribed(countyEntity: CountryModel){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 covidRepo.insertContrySubscribed(CountryEntitySubscribed(countyEntity.country,
@@ -54,25 +53,26 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
         }
     }
 
-    fun isCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed>{
-        var countrySubscribed: LiveData<CountryEntitySubscribed> = MutableLiveData<CountryEntitySubscribed>()
+    fun isCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed> {
+        var countrySubscribed: LiveData<CountryEntitySubscribed> =
+            MutableLiveData<CountryEntitySubscribed>()
         viewModelScope.async {
-            withContext(Dispatchers.IO){
-               countrySubscribed = covidRepo.getCountrySubscribed(countryName)
+            withContext(Dispatchers.IO) {
+                countrySubscribed = covidRepo.getCountrySubscribed(countryName)
             }
         }
         return countrySubscribed
-
-    fun updateCountrySubscribe(CountryModel: CountryModel, checkState: Boolean){
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                covidRepo.updateSubscribedCountry(CountryModel.country, checkState)
-            }
-        }
     }
+//    fun updateCountrySubscribe(CountryModel: CountryModel, checkState: Boolean){
+//        viewModelScope.launch {
+//            withContext(Dispatchers.IO){
+//                covidRepo.updateSubscribedCountry(CountryModel.country, checkState)
+//            }
+//        }
+//    }
   
 
-    fun deleteSubscribedCountry(countyEntity: CountyEntity){
+    fun deleteSubscribedCountry(countyEntity: CountryModel){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 covidRepo.deleteCountrySubscribed(CountryEntitySubscribed(countyEntity.country

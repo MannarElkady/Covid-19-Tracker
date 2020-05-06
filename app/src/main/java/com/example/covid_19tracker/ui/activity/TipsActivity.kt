@@ -12,7 +12,7 @@ class TipsActivity : WelcomeActivity() {
     return WelcomeConfiguration.Builder(this)
         .defaultBackgroundColor(R.color.primaryLightColor)
         .page(TitlePage(
-            R.drawable.ic_covid,
+            R.drawable.banar,
             getString(R.string.app_name)
         ))
         .page( BasicPage(
@@ -27,7 +27,7 @@ class TipsActivity : WelcomeActivity() {
             .background(R.color.orange)
         )
         .page( BasicPage(
-            R.drawable.symbol,
+            R.drawable.wash,
             getString(R.string.wash_hand),"")
             .background(R.color.primaryColor)
         )

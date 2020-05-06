@@ -42,7 +42,6 @@ data class CountryEntitySubscribed(
 @Entity(tableName = "country_info")
 @Keep
 @Parcelize
-
 data class LocalCountryInfo(
     @PrimaryKey(autoGenerate = true)
      var id: Int = 0

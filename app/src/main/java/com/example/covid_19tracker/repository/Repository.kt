@@ -34,9 +34,9 @@ class Repository(
     private fun shouldNotify(countries: List<CountryData>,subscribed: List<CountryEntitySubscribed>) : Boolean{
         val isChanged = ArrayList<Boolean>(1)
         countries.forEach{ coutrydata ->
-            subscribed.filter({
+            subscribed.filter {
                 return coutrydata.country.equals(it.country)
-            }).stream().anyMatch {
+            }.any{
                 isChanged[0] = (coutrydata.cases != it.totalCases)
                 coutrydata.cases != it.totalCases
             }

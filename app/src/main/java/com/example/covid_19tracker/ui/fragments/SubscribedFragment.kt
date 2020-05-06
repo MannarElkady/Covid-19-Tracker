@@ -1,23 +1,21 @@
 package com.example.covid_19tracker.ui.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.example.covid_19tracker.NavigationGraphDirections
-
 import com.example.covid_19tracker.R
 import com.example.covid_19tracker.database.CountryEntitySubscribed
-import com.example.covid_19tracker.ui.adapters.SubscripedRecycleViewAdapter
 import com.example.covid_19tracker.domain.CountryModel
+import com.example.covid_19tracker.ui.adapters.SubscripedRecycleViewAdapter
 import com.example.covid_19tracker.viewModels.SubscribedViewModel
 import kotlinx.android.synthetic.main.subscribed_fragment.*
 
