@@ -1,10 +1,7 @@
 package com.example.covid_19tracker.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface CovidDao {
@@ -14,8 +11,20 @@ interface CovidDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCountryHistory(countryHistory: LocalCountryHistory)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed)
+
+    @Delete
+    fun deleteCountrySubscribed(countryEntitySubscribed :CountryEntitySubscribed)
+
+    @Query("Select * From countrySubscribed")
+    fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>>
+
     @Query("Select * FROM country")
     fun getAllCountry(): LiveData<List<CountyEntity>>
+
+    @Query("SELECT * FROM countrySubscribed WHERE country=:countryName")
+    fun getCountrySubscribed(countryName: String):LiveData<CountryEntitySubscribed>
 
     @Query("SELECT * FROM country_history WHERE country=:countryName")
     fun geCountryHistory(countryName: String): LiveData<LocalCountryHistory>
@@ -35,6 +44,5 @@ interface CovidDao {
 
     @Query("SELECT * FROM country_history")
     fun getAllHistory(): List<LocalCountryHistory>
-    @Query("UPDATE country SET isSubscribed = :isSubscribed WHERE country = :countryName")
-    fun updateSubscribedCountry(countryName: String, isSubscribed: Boolean)
+
 }

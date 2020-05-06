@@ -16,12 +16,13 @@ import com.example.covid_19tracker.database.CountyEntity
 import com.example.covid_19tracker.NavigationGraphDirections
 
 import com.example.covid_19tracker.R
+import com.example.covid_19tracker.database.CountryEntitySubscribed
 import com.example.covid_19tracker.ui.adapters.SubscripedRecycleViewAdapter
 import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.viewModels.SubscribedViewModel
 import kotlinx.android.synthetic.main.subscribed_fragment.*
 
-class SubscribedFragment : Fragment() , SubscripedRecycleViewAdapter.OnItemSelected{
+class SubscribedFragment : Fragment(){
 
     companion object {
         fun newInstance() =
@@ -41,7 +42,7 @@ class SubscribedFragment : Fragment() , SubscripedRecycleViewAdapter.OnItemSelec
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(SubscribedViewModel::class.java)
         // TODO: Use the ViewModel
-        viewModel.getFavouriteCountryList()?.observe(viewLifecycleOwner,Observer<List<CountryModel>>{
+        viewModel.getFavouriteCountryList()?.observe(viewLifecycleOwner, Observer{
             it?.let {
                 setUpTableView(it)
             }
@@ -56,7 +57,7 @@ class SubscribedFragment : Fragment() , SubscripedRecycleViewAdapter.OnItemSelec
         recycle_view.visibility = View.INVISIBLE
     }
 
-    private fun setUpTableView(countriesList : List<CountryModel>) {
+    private fun setUpTableView(countriesList : List<CountryEntitySubscribed>) {
         subscribeAdapter = SubscripedRecycleViewAdapter(countriesList.toMutableList())
         recycle_view.layoutManager = LinearLayoutManager(context)
         recycle_view.adapter = subscribeAdapter
@@ -97,7 +98,4 @@ class SubscribedFragment : Fragment() , SubscripedRecycleViewAdapter.OnItemSelec
         }
     }
 
-    override fun onEntitySelected(position: Int) {
-        Log.i("yarb","item data ${subscribeAdapter.dataSet[position].country}")
-    }
 }

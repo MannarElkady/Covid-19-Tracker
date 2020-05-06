@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.example.covid_19tracker.R
 import com.example.covid_19tracker.viewModels.CountryDetailsViewModel
 import com.example.covid_19tracker.database.CountyEntity
@@ -19,6 +20,7 @@ import timber.log.Timber
 
 class CountryDetailsFragment : Fragment() {
 
+    private val args: CountryDetailsFragmentArgs by navArgs()
     private lateinit var country: CountyEntity
     companion object {
         fun newInstance() =
@@ -41,13 +43,19 @@ class CountryDetailsFragment : Fragment() {
         changeSubscription()
         viewModel = ViewModelProviders.of(this).get(CountryDetailsViewModel::class.java)
         // TODO: Use the ViewModel
-        viewModel.getCountryData()?.observe(viewLifecycleOwner,Observer<CountyEntity>{
-            it?.let {
-                country = it
-                setUpCountryData(it)
-                setUpSubscriptionButton(it.isSubscribed)
-            }
-        })
+        viewModel.setCountryEntity(args.contryData)
+        country = args.contryData
+        country?.let {
+            setUpCountryData(it)
+            setUpSubscriptionButton(it.country)
+        }
+//        viewModel.getCountryData()?.observe(viewLifecycleOwner,Observer<CountyEntity>{
+//            it?.let {
+//                country = it
+//                setUpCountryData(it)
+//                setUpSubscriptionButton(it.country)
+//            }
+//        })
         viewModel.getCountryHistory().observe(viewLifecycleOwner,Observer<LocalCountryHistory>{
             setUICardsEmpty()
             it?.let {
@@ -57,14 +65,23 @@ class CountryDetailsFragment : Fragment() {
         })
     }
 
-    fun setUpSubscriptionButton(isSubscribed : Boolean){
-        subscribeButton.isFavorite = isSubscribed
+    fun setUpSubscriptionButton(countryName: String){
+        viewModel.isCountrySubscribed(countryName).observe(viewLifecycleOwner, Observer {
+            it?.let {
+                subscribeButton.isFavorite = true
+            }
+        })
     }
+
     private fun changeSubscription() {
         subscribeButton.setOnFavoriteChangeListener(
             OnFavoriteChangeListener { buttonView, favorite ->
                 country?.let {
-                    viewModel.updateCountrySubscribe(country,favorite)
+                    if (favorite) {
+                        viewModel.addCountrySubscribed(it)
+                    } else {
+                        viewModel.deleteSubscribedCountry(it)
+                    }
                 }
             })
     }

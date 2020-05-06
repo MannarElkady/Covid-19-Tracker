@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
         viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer{
             val countryEntity = CountyEntity("Manar",
                 LocalCountryInfo(1,"","","",0.0,0.0),3232,453,234,34223,42342,444,44,
-                3942323,333,444,false)
+                3942323,333,444)
             val action = HomeFragmentDirections.actionHomeFragmentToCountryDetails(countryEntity)
             findNavController().navigate(action)
             viewModel.doneNavigating()
