@@ -114,24 +114,19 @@ dependencies {
     /*Manar*/
     //Navigation Bar
     implementation "com.github.ibrahimsn98:SmoothBottomBar:$version_smooth_bar"
-
     //View model kotlin
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_viewModel_kotlin"
-
     //Elastic Card
     implementation "com.github.armcha:ElasticView:$version_elastic_card"
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation_controller"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation_controller"
-
     //Dagger
     implementation 'com.google.dagger:dagger:2.16'
     kapt 'com.google.dagger:dagger-compiler:2.16'
     implementation "com.google.dagger:dagger-android:2.16"
     kapt "com.google.dagger:dagger-android-processor:2.16"
-
     //Time
     implementation "com.soywiz.korlibs.klock:klock-jvm:$klockVersion"
-
     //DragDropSwipeRecycleView
     implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.6.0'
     //subscribe Button

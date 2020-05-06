@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.covid_19tracker.CovidApplication
-import com.example.covid_19tracker.Utils.Covid_19Notification
+import com.example.covid_19tracker.utils.Covid_19Notification
 import timber.log.Timber
 
 class RefreshWorkManager(val appContext: Context, params: WorkerParameters) : CoroutineWorker(appContext,params) {
