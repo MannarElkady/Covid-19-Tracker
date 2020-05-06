@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.covid_19tracker.R
 import com.example.covid_19tracker.viewModels.CountryDetailsViewModel
-import com.example.covid_19tracker.database.CountyEntity
 import com.example.covid_19tracker.database.LocalCountryHistory
+import com.example.covid_19tracker.domain.CountryModel
 import com.github.ivbaranov.mfb.MaterialFavoriteButton.OnFavoriteChangeListener
 import com.soywiz.klock.DateTime
 import kotlinx.android.synthetic.main.country_details_fragment.*
@@ -19,7 +19,7 @@ import timber.log.Timber
 
 class CountryDetailsFragment : Fragment() {
 
-    private lateinit var country: CountyEntity
+    private lateinit var country: CountryModel
     companion object {
         fun newInstance() =
             CountryDetailsFragment()
@@ -41,11 +41,11 @@ class CountryDetailsFragment : Fragment() {
         changeSubscription()
         viewModel = ViewModelProviders.of(this).get(CountryDetailsViewModel::class.java)
         // TODO: Use the ViewModel
-        viewModel.getCountryData()?.observe(viewLifecycleOwner,Observer<CountyEntity>{
+        viewModel.getCountryData()?.observe(viewLifecycleOwner,Observer<CountryModel>{
             it?.let {
                 country = it
                 setUpCountryData(it)
-                setUpSubscriptionButton(it.isSubscribed)
+                //setUpSubscriptionButton(it.isSubscribed)
             }
         })
         viewModel.getCountryHistory().observe(viewLifecycleOwner,Observer<LocalCountryHistory>{
@@ -69,12 +69,12 @@ class CountryDetailsFragment : Fragment() {
             })
     }
 
-    private fun setUpCountryData(countyEntity: CountyEntity) {
-        deathTodayTextView.setText("Today's Death: ${countyEntity.todayDeaths.toString()}")
-        casesTodayTextView.setText("Today's Cases: ${countyEntity.todayCases.toString()}")
-        totalRecoveredTextView.setText(countyEntity.recovered.toString())
-        totalDeathsTextView.setText(countyEntity.deaths.toString())
-        totalCasesTextView.setText(countyEntity.cases.toString())
+    private fun setUpCountryData(CountryModel: CountryModel) {
+        deathTodayTextView.setText("Today's Death: ${CountryModel.todayDeaths.toString()}")
+        casesTodayTextView.setText("Today's Cases: ${CountryModel.todayCases.toString()}")
+        totalRecoveredTextView.setText(CountryModel.recovered.toString())
+        totalDeathsTextView.setText(CountryModel.deaths.toString())
+        totalCasesTextView.setText(CountryModel.cases.toString())
     }
 
     fun setDateTime(){

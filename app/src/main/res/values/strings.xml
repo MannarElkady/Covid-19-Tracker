@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">Covid-19 Tracker</string>
     <!--Ahmed-->
-    <string name="cases">Total cases: %d</string>
-    <string name="death">Total death: %d</string>
+    <string name="cases">cases: %d</string>
+    <string name="death">death: %d</string>
     <string name="call_now">Call Now</string>
-    <string name="recovered">Total recovery: %d</string>
+    <string name="recovered">recovered: %d</string>
     <string name="advice_title">Are felling Sick ?</string>
     <string name="advice_body">If you feel sick with any of covid-19 symptoms call this number immediately for help </string>
     <string name="show_more">Show More</string>
+    <string name="stay_home">Stay at home for as long as possible</string>
+    <string name="keep_distance">Keep a safe distance from others</string>
+    <string name="wash_hand">Wash your hands regularly</string>
+    <string name="cover_mouth">Cover your mouth and nose when you cough</string>
     <string-array name="order_list">
         <item>cases</item>
         <item>death</item>

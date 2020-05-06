@@ -13,5 +13,6 @@
     <color name="whiteColor">#ffffff</color>
     <color name="BlackColor">#000000</color>
     <color name="secondaryTextColor">#fa5252</color>
+    <color name="orange">#FFC107</color>
     <!--Manar-->
 </resources>
