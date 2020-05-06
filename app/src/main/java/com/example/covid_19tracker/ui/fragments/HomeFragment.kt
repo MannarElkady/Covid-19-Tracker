@@ -14,15 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.covid_19tracker.CovidApplication
 import com.example.covid_19tracker.R
-import com.example.covid_19tracker.repository.Repository
+import com.example.covid_19tracker.databinding.HomeFragmentBinding
+import com.example.covid_19tracker.repository.RepositoryContract
 import com.example.covid_19tracker.ui.adapters.CountryAdapter
 import com.example.covid_19tracker.ui.adapters.CountryListener
 import com.example.covid_19tracker.viewModels.HomeViewModel
-import com.example.covid_19tracker.databinding.HomeFragmentBinding
-import com.example.covid_19tracker.repository.RepositoryContract
-import com.example.covid_19tracker.utils.Order
 import com.google.android.material.chip.Chip
-import timber.log.Timber
 
 
 class HomeFragment : Fragment() {
@@ -47,9 +44,11 @@ class HomeFragment : Fragment() {
             CountryAdapter(CountryListener { countryName -> viewModel.onCountryClicked(countryName) })
         binding.countryList.adapter = adapter
         viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer {
-//            val action =HomeFragmentDirections.actionHomeFragmentToCountryDetails()
-//            findNavController().navigate(action)
-//            viewModel.doneNavigating()
+            it?.let {
+                val action = HomeFragmentDirections.actionHomeFragmentToCountryDetails(it)
+                findNavController().navigate(action)
+                viewModel.doneNavigating()
+            }
         })
         initChipGroup()
         return binding.root

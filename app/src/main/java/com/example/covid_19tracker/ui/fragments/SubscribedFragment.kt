@@ -12,7 +12,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
-import com.example.covid_19tracker.database.CountyEntity
 import com.example.covid_19tracker.NavigationGraphDirections
 
 import com.example.covid_19tracker.R
@@ -76,8 +75,8 @@ class SubscribedFragment : Fragment() , SubscripedRecycleViewAdapter.OnItemSelec
     }*/
 
 
-    private val onItemSwipeListener = object : OnItemSwipeListener<CountyEntity> {
-        override fun onItemSwiped(position: Int, direction: OnItemSwipeListener.SwipeDirection, item: CountyEntity): Boolean {
+    private val onItemSwipeListener = object : OnItemSwipeListener<CountryModel> {
+        override fun onItemSwiped(position: Int, direction: OnItemSwipeListener.SwipeDirection, item: CountryModel): Boolean {
             if(direction == OnItemSwipeListener.SwipeDirection.RIGHT_TO_LEFT){
                 //delete
                 // Handle action of item swiped

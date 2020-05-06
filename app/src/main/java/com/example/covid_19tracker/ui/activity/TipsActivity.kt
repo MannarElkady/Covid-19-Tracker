@@ -16,12 +16,12 @@ class TipsActivity : WelcomeActivity() {
             getString(R.string.app_name)
         ))
         .page( BasicPage(
-            R.drawable.stay_home,
+            R.drawable.house,
             getString(R.string.stay_home),"")
             .background(R.color.secondaryTextColor)
         )
         .page( BasicPage(
-            R.drawable.medical,
+            R.drawable.physical,
             getString(R.string.keep_distance),
             "")
             .background(R.color.orange)

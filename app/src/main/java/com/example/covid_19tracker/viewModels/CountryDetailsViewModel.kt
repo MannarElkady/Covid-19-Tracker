@@ -3,9 +3,9 @@ package com.example.covid_19tracker.viewModels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.covid_19tracker.CovidApplication
-import com.example.covid_19tracker.database.CountyEntity
 import com.example.covid_19tracker.database.LocalCountryHistory
 import com.example.covid_19tracker.database.LocalDataSource
+import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.network.RemoteDataSource
 import com.example.covid_19tracker.repository.Repository
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 class CountryDetailsViewModel(application: Application) : AndroidViewModel(application) {
     private val covidRepo :Repository
     private var countryHistoryLiveData: LiveData<LocalCountryHistory>
-    private var countryEntityLiveData : LiveData<CountyEntity>?
+    private var countryEntityLiveData : LiveData<CountryModel>?
 
     init {
         covidRepo = Repository(RemoteDataSource,LocalDataSource(application))
@@ -31,14 +31,14 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
         return countryHistoryLiveData
     }
 
-    fun updateCountrySubscribe(countyEntity: CountyEntity, checkState: Boolean){
+    fun updateCountrySubscribe(CountryModel: CountryModel, checkState: Boolean){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
-                covidRepo.updateSubscribedCountry(countyEntity.country, checkState)
+                covidRepo.updateSubscribedCountry(CountryModel.country, checkState)
             }
         }
     }
-    fun getCountryData() : LiveData<CountyEntity>?{
+    fun getCountryData() : LiveData<CountryModel>?{
         return countryEntityLiveData
     }
 }

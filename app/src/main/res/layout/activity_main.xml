@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@color/applicationBackgroundColor"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <fragment
-        android:id="@+id/nav_host"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/bottomBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/navigation_graph" />
+        android:background="@color/applicationBackgroundColor"
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.MainActivity">
 
-    <me.ibrahimsn.lib.SmoothBottomBar
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="0dp"
-        app:backgroundColor="@android:color/transparent"
-        app:cornerRadius="10dp"
-        app:iconSize="45dp"
-        app:iconTint="@color/secondaryDarkColor"
-        app:iconTintActive="@color/whiteColor"
-        app:indicatorColor="@color/primaryLightColor"
-        app:itemPadding="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_host"
-        app:menu="@menu/navigation_menu"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:textColor="@color/whiteColor" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <fragment
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@id/bottomBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/navigation_graph" />
+
+        <me.ibrahimsn.lib.SmoothBottomBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginTop="0dp"
+            app:backgroundColor="@android:color/transparent"
+            app:cornerRadius="10dp"
+            app:iconSize="45dp"
+            app:iconTint="@color/secondaryDarkColor"
+            app:iconTintActive="@color/whiteColor"
+            app:indicatorColor="@color/primaryLightColor"
+            app:itemPadding="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nav_host"
+            app:menu="@menu/navigation_menu"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:textColor="@color/whiteColor" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

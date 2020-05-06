@@ -1,12 +1,16 @@
 package com.example.covid_19tracker.ui.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.covid_19tracker.R
+import com.example.covid_19tracker.databinding.ActivityMainBinding
 import com.stephentuso.welcome.WelcomeHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
