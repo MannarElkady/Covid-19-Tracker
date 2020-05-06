@@ -9,6 +9,7 @@ import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.domain.asCountryModel
 import com.example.covid_19tracker.domain.asCountryModelList
 import com.example.covid_19tracker.network.*
+import com.example.covid_19tracker.utils.Covid_19Notification
 import kotlinx.coroutines.*
 import timber.log.Timber
 
@@ -22,11 +23,25 @@ class Repository(
         }
 
 
-    override suspend fun refreshCountries() {
+    override suspend fun refreshCountries(){
         withContext(Dispatchers.IO) {
             val countries = remoteDataSource.getCountriesData()
+            val subscribedCountries= localDataSource.getAllCoutrySubscribed()
             localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
         }
+    }
+
+    private fun shouldNotify(countries: List<CountryData>,subscribed: List<CountryEntitySubscribed>) : Boolean{
+        val isChanged = ArrayList<Boolean>(1)
+        countries.forEach{ coutrydata ->
+            subscribed.filter {
+                return coutrydata.country.equals(it.country)
+            }.any{
+                isChanged[0] = (coutrydata.cases != it.totalCases)
+                coutrydata.cases != it.totalCases
+            }
+        }
+        return isChanged[0]
     }
 
     override suspend fun getCountryData(countryName: String): LiveData<CountryModel>? {
@@ -34,6 +49,22 @@ class Repository(
             it.asCountryModel()
         }
 
+    }
+
+    override fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed) {
+        localDataSource.insertContrySubscribed(countryEntitySubscribed)
+    }
+
+    override fun deleteCountrySubscribed(countryEntitySubscribed: CountryEntitySubscribed) {
+        localDataSource.deleteCountrySubscribed(countryEntitySubscribed)
+    }
+
+    override fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>> {
+        return localDataSource.getAllCoutrySubscribed()
+    }
+
+    override fun getCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed> {
+        return localDataSource.getCountrySubscribed(countryName)
     }
 
 

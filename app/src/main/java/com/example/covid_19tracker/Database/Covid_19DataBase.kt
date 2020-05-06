@@ -10,7 +10,7 @@ import androidx.room.*
  * This pattern is pretty much the same for any database,
  * so you can reuse it.
  */
-@Database(entities = [CountyEntity::class,LocalCountryHistory::class,LocalCountryInfo::class,LocalHistory::class,CountryEntitySubscribed::class], version = 1, exportSchema = false)
+@Database(entities = [CountyEntity::class,LocalCountryHistory::class,LocalCountryInfo::class,LocalHistory::class], version = 1, exportSchema = false)
 @TypeConverters(MapConverter::class,ListConverter::class)
 abstract class Covid_19DataBase : RoomDatabase() {
 

@@ -6,11 +6,11 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.example.covid_19tracker.R
-import com.example.covid_19tracker.domain.CountryModel
+import com.example.covid_19tracker.database.CountryEntitySubscribed
 import me.ibrahimsn.lib.OnItemSelectedListener
 
-class SubscripedRecycleViewAdapter(dataSet: MutableList<CountryModel>)
-    : DragDropSwipeAdapter<CountryModel, SubscripedRecycleViewAdapter.ViewHolder>((dataSet)) {
+class SubscripedRecycleViewAdapter(dataSet: MutableList<CountryEntitySubscribed>)
+    : DragDropSwipeAdapter<CountryEntitySubscribed, SubscripedRecycleViewAdapter.ViewHolder>((dataSet)) {
 
     class ViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView),View.OnClickListener {
         val countryText: TextView = itemView.findViewById(R.id.countryNameTextView)
@@ -28,23 +28,20 @@ class SubscripedRecycleViewAdapter(dataSet: MutableList<CountryModel>)
 
     override fun getViewHolder(itemLayout: View) = SubscripedRecycleViewAdapter.ViewHolder(itemLayout)
 
-    override fun onBindViewHolder(item: CountryModel, viewHolder: SubscripedRecycleViewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(item: CountryEntitySubscribed, viewHolder: SubscripedRecycleViewAdapter.ViewHolder, position: Int) {
         // Here we update the contents of the view holder's views to reflect the item's data
         viewHolder.countryText.text = item.country
-        viewHolder.totalCasesText.text = "Total Cases: ${item.cases.toString()}"
+        viewHolder.totalCasesText.text = "Total Cases: ${item.totalCases.toString()}"
         Glide.with(viewHolder.itemView)
-            .load(item.countryInfo.flag)
+            .load(item.countryThumb)
             .placeholder(R.drawable.sick_person)
             .fitCenter()
             .into(viewHolder.countryImage);
     }
 
-    override fun getViewToTouchToStartDraggingItem(item: CountryModel, viewHolder: SubscripedRecycleViewAdapter.ViewHolder, position: Int): View? {
+    override fun getViewToTouchToStartDraggingItem(item: CountryEntitySubscribed, viewHolder: SubscripedRecycleViewAdapter.ViewHolder, position: Int): View? {
         // We return the view holder's view on which the user has to touch to drag the item
         return viewHolder.itemView
     }
 
-    public interface OnItemSelected{
-        fun onEntitySelected(position: Int)
-    }
 }

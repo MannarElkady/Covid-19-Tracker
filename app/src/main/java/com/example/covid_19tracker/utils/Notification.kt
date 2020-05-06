@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.Utils
+package com.example.covid_19tracker.utils
 
 import android.app.Notification
 import android.app.NotificationChannel

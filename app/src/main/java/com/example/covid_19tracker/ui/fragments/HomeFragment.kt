@@ -25,6 +25,7 @@ import com.example.covid_19tracker.repository.RepositoryContract
 import com.example.covid_19tracker.ui.adapters.CountryAdapter
 import com.example.covid_19tracker.ui.adapters.CountryListener
 import com.example.covid_19tracker.viewModels.HomeViewModel
+
 import com.google.android.material.chip.Chip
 
 
@@ -49,6 +50,7 @@ class HomeFragment : Fragment() {
         val adapter =
             CountryAdapter(CountryListener { countryName -> viewModel.onCountryClicked(countryName) })
         binding.countryList.adapter = adapter
+
         viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val action = HomeFragmentDirections.actionHomeFragmentToCountryDetails(it)
