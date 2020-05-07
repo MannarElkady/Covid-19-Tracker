@@ -4,40 +4,43 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.covid_19tracker.viewModels.HomeViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_margin="20dp"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/advice_title"
             android:layout_margin="8dp"
-            android:textColor="@color/whiteColor"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:text="@string/advice_title"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/whiteColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="@string/advice_body"
-            android:textColor="@color/whiteColor"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/whiteColor" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            app:iconTint="@color/whiteColor"
-            android:textColor="@color/whiteColor"
-            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-            app:backgroundTint="@color/secondaryTextColor"
             android:text="@string/call_now"
-            app:icon="@drawable/ic_call_black_24dp" />
+            android:onClick="@{() -> viewModel.callHotLine()}"
+            android:textColor="@color/whiteColor"
+            app:backgroundTint="@color/secondaryTextColor"
+            app:icon="@drawable/ic_call_black_24dp"
+            app:iconTint="@color/whiteColor" />
     </LinearLayout>
 </layout>

@@ -26,7 +26,6 @@ class Repository(
     override suspend fun refreshCountries(){
         withContext(Dispatchers.IO) {
             val countries = remoteDataSource.getCountriesData()
-            val subscribedCountries= localDataSource.getAllCoutrySubscribed()
             localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
         }
     }
@@ -86,11 +85,6 @@ class Repository(
         return localDataSource.getAllHistory()
     }
 
-    override fun orderList() {
-        val orderdCountry = localDataSource.getCountryByCases()
-            Timber.v("order")
-        countryList = Transformations.map(orderdCountry) {
-            it.asCountryModelList()
-        }
-    }
+
+
 }
