@@ -1,6 +1,7 @@
 package com.example.covid_19tracker.ui.activity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -18,8 +19,15 @@ class MainActivity : AppCompatActivity() {
         welcomeScreen = WelcomeHelper(this, TipsActivity::class.java)
         welcomeScreen!!.show(savedInstanceState)
         navController = findNavController(R.id.nav_host)
-        //setupActionBarWithNavController(navController)
-        //bottomBar.setupWithNavController(navController)
+        supportActionBar?.hide()
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.countryDetails) {
+                bottomBar.visibility = View.GONE
+            } else {
+                bottomBar.visibility = View.VISIBLE
+            }
+        }
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.navigation_menu,menu)
