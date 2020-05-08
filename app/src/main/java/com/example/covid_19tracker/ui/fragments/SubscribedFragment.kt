@@ -74,8 +74,8 @@ class SubscribedFragment : Fragment(){
     }*/
 
 
-    private val onItemSwipeListener = object : OnItemSwipeListener<CountryModel> {
-        override fun onItemSwiped(position: Int, direction: OnItemSwipeListener.SwipeDirection, item: CountryModel): Boolean {
+    private val onItemSwipeListener = object : OnItemSwipeListener<CountryEntitySubscribed> {
+        override fun onItemSwiped(position: Int, direction: OnItemSwipeListener.SwipeDirection, item: CountryEntitySubscribed): Boolean {
             if(direction == OnItemSwipeListener.SwipeDirection.RIGHT_TO_LEFT){
                 //delete
                 // Handle action of item swiped
@@ -86,9 +86,9 @@ class SubscribedFragment : Fragment(){
             }
             else if(direction == OnItemSwipeListener.SwipeDirection.LEFT_TO_RIGHT){
                 //navigate to details
-                val detailsAction = NavigationGraphDirections
-                    .actionGlobalCountryDetails(item)
-                view?.findNavController()?.navigate(R.id.action_global_countryDetails)
+                val countryModel = viewModel.getEquivalentCountryModel(item)
+                val detailsAction = NavigationGraphDirections.actionGlobalCountryDetails(countryModel)
+                view?.findNavController()?.navigate(detailsAction)
             }
             return true
 

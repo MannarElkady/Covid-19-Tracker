@@ -35,7 +35,7 @@
         android:label="country_details_fragment"
         tools:layout="@layout/country_details_fragment" >
         <argument
-            android:name="contryData"
+            android:name="countryData"
             app:argType="com.example.covid_19tracker.domain.CountryModel" />
     </fragment>
     <action android:id="@+id/action_global_countryDetails"

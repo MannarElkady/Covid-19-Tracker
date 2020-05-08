@@ -1,15 +1,18 @@
 package com.example.covid_19tracker.database
 
+import android.os.Parcelable
 import androidx.annotation.Keep
 import androidx.room.*
 import com.example.covid_19tracker.network.moshi
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Types
+import kotlinx.android.parcel.Parcelize
 import org.json.JSONObject
 import java.io.Serializable
 
 @Entity(tableName = "country")
 @Keep
+@SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 data class CountyEntity(
     @PrimaryKey
     val country: String,
@@ -38,6 +41,7 @@ data class CountryEntitySubscribed(
 
 @Entity(tableName = "country_info")
 @Keep
+@Parcelize
 data class LocalCountryInfo(
     @PrimaryKey(autoGenerate = true)
      var id: Int = 0
@@ -46,11 +50,12 @@ data class LocalCountryInfo(
     , var flag: String=""
     , var lat: Double=0.0
     , var long: Double=0.0
-)
+) : Parcelable
 
 
 @Entity(tableName = "country_history")
 @Keep
+@SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 data class LocalCountryHistory(
     @PrimaryKey
     val country: String
