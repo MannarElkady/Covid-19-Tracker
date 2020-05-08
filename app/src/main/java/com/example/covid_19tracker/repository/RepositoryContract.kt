@@ -18,4 +18,5 @@ interface RepositoryContract {
     fun getCountrySubscribed(countryName: String):LiveData<CountryEntitySubscribed>
     suspend fun getCountryData(countryName: String): LiveData<CountryModel>?
     suspend fun notifyCountries() : List<String>
+    fun updateCountrySubscriped(countryEntitySubscribed: CountryEntitySubscribed)
 }

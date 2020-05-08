@@ -41,6 +41,9 @@ interface CovidDao {
     @Query("SELECT * FROM country ORDER BY recovered DESC ")
     fun getCountryByRecovered(): List<CountyEntity>
 
+    @Update
+    fun updateCountrySubscriped(countryEntitySubscribed: CountryEntitySubscribed)
+
     // just for testing
     @Query("SELECT * FROM country WHERE country=:countryName")
     fun getCountryByName(countryName: String): LiveData<CountyEntity>

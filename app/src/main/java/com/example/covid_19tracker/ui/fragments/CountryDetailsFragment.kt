@@ -100,7 +100,7 @@ class CountryDetailsFragment : Fragment() {
 
     fun setUpSubscriptionButton(countryName: String){
         viewModel.isCountrySubscribed(countryName).observe(viewLifecycleOwner, Observer {
-            it?.let {
+            it.let {
                 subscribeButton.isFavorite = true
             }
         })

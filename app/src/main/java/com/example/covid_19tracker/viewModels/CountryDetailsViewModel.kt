@@ -49,7 +49,7 @@ class CountryDetailsViewModel(application: Application) : AndroidViewModel(appli
     fun isCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed> {
         var countrySubscribed: LiveData<CountryEntitySubscribed> =
             MutableLiveData<CountryEntitySubscribed>()
-        viewModelScope.async {
+        viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 countrySubscribed = covidRepo.getCountrySubscribed(countryName)
             }

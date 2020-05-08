@@ -25,10 +25,12 @@ class Repository(
     }
 
     private fun shouldNotify(countries: List<CountryData>,subscribed: CountryEntitySubscribed) : Boolean{
-        val bool = subscribed.totalCases != countries.filter {
+        val newCases = countries.filter {
             it.country.equals(subscribed.country)
         }.first().cases
-        return bool
+        val notify = subscribed.totalCases != newCases
+        localDataSource.updateCountrySubscriped(CountryEntitySubscribed(subscribed.country,newCases,subscribed.countryThumb))
+        return notify
     }
 
     override suspend fun getCountryData(countryName: String): LiveData<CountryModel>? {
@@ -50,6 +52,10 @@ class Repository(
             localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
         }
         return listOfCoutriesToNotify
+    }
+
+    override fun updateCountrySubscriped(countryEntitySubscribed: CountryEntitySubscribed) {
+        return localDataSource.updateCountrySubscriped(countryEntitySubscribed)
     }
 
     override fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed) {

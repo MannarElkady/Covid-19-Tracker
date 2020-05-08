@@ -58,6 +58,10 @@ class LocalDataSource(context: Context) : CovidDao {
         TODO("not implemented")
     }
 
+    override fun updateCountrySubscriped(countryEntitySubscribed: CountryEntitySubscribed) {
+        return dao.updateCountrySubscriped(countryEntitySubscribed)
+    }
+
 
     override fun getCountryByName(countryName: String): LiveData<CountyEntity> {
         return dao.getCountryByName(countryName)

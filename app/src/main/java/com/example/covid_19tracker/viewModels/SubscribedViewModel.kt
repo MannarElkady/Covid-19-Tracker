@@ -26,7 +26,6 @@ class SubscribedViewModel(application: Application) : AndroidViewModel(applicati
         countryList = covidRepo.countryList
         countriesLiveData = MutableLiveData()
         viewModelScope.launch {
-          //  countriesLiveData = covidRepo.countrySub
             countriesLiveData = covidRepo.getAllCoutrySubscribedLiveData()
         }
     }
