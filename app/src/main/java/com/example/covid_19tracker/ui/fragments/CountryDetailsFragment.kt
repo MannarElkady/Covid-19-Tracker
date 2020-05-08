@@ -1,7 +1,6 @@
 package com.example.covid_19tracker.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.covid_19tracker.R
 import com.example.covid_19tracker.domain.CountryModel
-import com.example.covid_19tracker.network.CountryHistory
 import com.example.covid_19tracker.viewModels.CountryDetailsViewModel
 import com.github.ivbaranov.mfb.MaterialFavoriteButton.OnFavoriteChangeListener
 import com.github.mikephil.charting.animation.Easing
@@ -20,14 +18,12 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.soywiz.klock.DateTime
 import kotlinx.android.synthetic.main.country_details_fragment.*
-import timber.log.Timber
 
 
 class CountryDetailsFragment : Fragment() {
 
     private val args: CountryDetailsFragmentArgs by navArgs()
 
-    private lateinit var countryHistory: CountryHistory
     private lateinit var country: CountryModel
 
     companion object {
@@ -50,7 +46,6 @@ class CountryDetailsFragment : Fragment() {
         setDateTime()
         changeSubscription()
         viewModel = ViewModelProviders.of(this).get(CountryDetailsViewModel::class.java)
-
         country = args.countryData
         country?.let {
             setUpCountryData(it)
@@ -124,12 +119,13 @@ class CountryDetailsFragment : Fragment() {
             })
     }
 
-    private fun setUpCountryData(CountryModel: CountryModel) {
-        deathTodayTextView.setText("Today's Death: ${CountryModel.todayDeaths.toString()}")
-        casesTodayTextView.setText("Today's Cases: ${CountryModel.todayCases.toString()}")
-        totalRecoveredTextView.setText(CountryModel.recovered.toString())
-        totalDeathsTextView.setText(CountryModel.deaths.toString())
-        totalCasesTextView.setText(CountryModel.cases.toString())
+    private fun setUpCountryData(countryModel: CountryModel) {
+        deathTodayTextView.text = "Today's Death: ${countryModel.todayDeaths.toString()}"
+        casesTodayTextView.text = "Today's Cases: ${countryModel.todayCases.toString()}"
+        totalRecoveredTextView.text = countryModel.recovered.toString()
+        totalDeathsTextView.text = countryModel.deaths.toString()
+        totalCasesTextView.text = countryModel.cases.toString()
+        countyName.text = countryModel.country
     }
 
     fun setDateTime(){
