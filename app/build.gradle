@@ -135,5 +135,7 @@ dependencies {
 
     //Charts
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //Live Data with coroutine
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha01'
     /*Manar*/
 }

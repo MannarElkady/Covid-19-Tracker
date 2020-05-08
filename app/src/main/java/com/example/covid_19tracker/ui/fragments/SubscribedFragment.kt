@@ -39,11 +39,11 @@ class SubscribedFragment : Fragment(){
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(SubscribedViewModel::class.java)
         // TODO: Use the ViewModel
-        viewModel.getFavouriteCountryList()?.observe(viewLifecycleOwner, Observer{
+        viewModel.getFavouriteCountryList().observe(viewLifecycleOwner, Observer{
             it?.let {
                 setUpTableView(it)
             }
-            if(it.size == 0){
+            if(it.size == 0 ||it ==null){
                 displayNoSubscription()
             }
         })

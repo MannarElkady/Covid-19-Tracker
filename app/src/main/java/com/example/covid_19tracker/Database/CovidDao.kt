@@ -18,7 +18,10 @@ interface CovidDao {
     fun deleteCountrySubscribed(countryEntitySubscribed :CountryEntitySubscribed)
 
     @Query("Select * From countrySubscribed")
-    fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>>
+    fun getAllCoutrySubscribed(): List<CountryEntitySubscribed>
+
+    @Query("Select * From countrySubscribed")
+    fun getAllCoutrySubscribedLiveData(): LiveData<List<CountryEntitySubscribed>>
 
     @Query("Select * FROM country")
     fun getAllCountry(): LiveData<List<CountyEntity>>

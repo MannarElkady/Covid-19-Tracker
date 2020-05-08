@@ -35,8 +35,10 @@ class CovidApplication:Application() {
     fun setUpRefreshWorker(){
         val constraints = Constraints.Builder().setRequiresBatteryNotLow(true)
             .setRequiredNetworkType(NetworkType.CONNECTED)
-            .setRequiresDeviceIdle(false).build()
+            .setRequiresDeviceIdle(false)
+            .build()
         val refreshRequest = PeriodicWorkRequestBuilder<RefreshWorkManager>(REFRESH_TIME,TimeUnit.MINUTES)
+            .addTag(RefreshWorkManager.REFRESH_WORKER)
             .setConstraints(constraints).build()
         WorkManager.getInstance().enqueueUniquePeriodicWork(RefreshWorkManager.REFRESH_WORKER
             ,ExistingPeriodicWorkPolicy.REPLACE,refreshRequest)

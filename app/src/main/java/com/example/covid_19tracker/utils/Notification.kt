@@ -12,7 +12,8 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.covid_19tracker.R
 
 object Covid_19Notification {
-    fun displayApplicationNotification(context: Context, channelID: String, title:String, message: String){
+    fun displayApplicationNotification(context: Context, channelID: String, title:String,
+                                       message: String, notificationID:Int){
         var builder = NotificationCompat.Builder(context,channelID)
             .setSmallIcon(R.drawable.bell_ring)
             .setContentTitle(title)
@@ -25,7 +26,7 @@ object Covid_19Notification {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createCovid_19NotificationChannel(channelID, context)
         }
-        NotificationManagerCompat.from(context).notify(1,builder.build())
+        NotificationManagerCompat.from(context).notify(notificationID,builder.build())
     }
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createCovid_19NotificationChannel(channelID: String, context: Context){

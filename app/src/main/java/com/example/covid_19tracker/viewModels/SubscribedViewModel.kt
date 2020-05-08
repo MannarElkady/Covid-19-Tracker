@@ -26,7 +26,8 @@ class SubscribedViewModel(application: Application) : AndroidViewModel(applicati
         countryList = covidRepo.countryList
         countriesLiveData = MutableLiveData()
         viewModelScope.launch {
-            countriesLiveData = covidRepo.getAllCoutrySubscribed()
+          //  countriesLiveData = covidRepo.countrySub
+            countriesLiveData = covidRepo.getAllCoutrySubscribedLiveData()
         }
     }
 
@@ -41,9 +42,8 @@ class SubscribedViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-
     fun getEquivalentCountryModel(countryEntitySubscribed: CountryEntitySubscribed): CountryModel{
-        return countryList?.value?.filter {
+        return countryList.value?.filter {
             it.country.equals(countryEntitySubscribed.country)
         }!!.first()
     }

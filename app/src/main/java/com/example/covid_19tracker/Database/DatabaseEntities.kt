@@ -35,7 +35,7 @@ data class CountyEntity(
 data class CountryEntitySubscribed(
     @PrimaryKey
     val country: String,
-    val totalCases: Long,
+    var totalCases: Long,
     val countryThumb: String
 )
 
