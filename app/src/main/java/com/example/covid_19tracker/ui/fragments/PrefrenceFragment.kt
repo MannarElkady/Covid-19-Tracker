@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.preference.*
 import com.example.covid_19tracker.R
+import com.example.covid_19tracker.ui.activity.MainActivity
+import java.util.*
 
 
 class PrefrenceFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPreferenceChangeListener {
@@ -37,10 +39,22 @@ class PrefrenceFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedP
                 setPreferenceSummary(preference, value!!)
             }
         }
+        setupLocal()
         requireActivity().finish()
         startActivity(requireActivity().intent)
     }
+    private fun setupLocal() {
+        var change = ""
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val language = sharedPreferences.getString("language", "")
+        if (language == "Ar") {
+            change = "ar"
+        } else {
+            change = "en"
+        }
 
+        MainActivity.dLocale = Locale(change) //set any locale you want here
+    }
     /**
      * Updates the summary for the preference
      *
