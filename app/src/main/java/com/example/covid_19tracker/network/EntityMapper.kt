@@ -33,7 +33,7 @@ fun CountryInfo.asLocalCountryInfo(): LocalCountryInfo {
 }
 
 fun CountryHistory.asLocalCountryHistory(): LocalCountryHistory {
-    return LocalCountryHistory(this.country, this.provinces, this.timeline.asLocalHistory())
+    return LocalCountryHistory(this.country, this.province, this.timeline.asLocalHistory())
 }
 
 fun History.asLocalHistory(): LocalHistory {

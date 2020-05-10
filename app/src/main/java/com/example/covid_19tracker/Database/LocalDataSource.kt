@@ -26,8 +26,12 @@ class LocalDataSource(context: Context) : CovidDao {
         dao.deleteCountrySubscribed(countryEntitySubscribed)
     }
 
-    override fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>> {
+    override fun getAllCoutrySubscribed(): List<CountryEntitySubscribed> {
         return dao.getAllCoutrySubscribed()
+    }
+
+    override fun getAllCoutrySubscribedLiveData(): LiveData<List<CountryEntitySubscribed>> {
+        return dao.getAllCoutrySubscribedLiveData()
     }
 
     override fun getAllCountry(): LiveData<List<CountyEntity>> {
@@ -54,8 +58,12 @@ class LocalDataSource(context: Context) : CovidDao {
         TODO("not implemented")
     }
 
+    override fun updateCountrySubscriped(countryEntitySubscribed: CountryEntitySubscribed) {
+        return dao.updateCountrySubscriped(countryEntitySubscribed)
+    }
 
-    override fun getCountryByName(countryName: String): LiveData<CountyEntity>? {
+
+    override fun getCountryByName(countryName: String): LiveData<CountyEntity> {
         return dao.getCountryByName(countryName)
     }
 

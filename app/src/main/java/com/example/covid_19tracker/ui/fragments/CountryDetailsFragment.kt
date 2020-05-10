@@ -9,13 +9,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.covid_19tracker.R
-import com.example.covid_19tracker.viewModels.CountryDetailsViewModel
-import com.example.covid_19tracker.database.LocalCountryHistory
 import com.example.covid_19tracker.domain.CountryModel
+import com.example.covid_19tracker.viewModels.CountryDetailsViewModel
 import com.github.ivbaranov.mfb.MaterialFavoriteButton.OnFavoriteChangeListener
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.soywiz.klock.DateTime
 import kotlinx.android.synthetic.main.country_details_fragment.*
-import timber.log.Timber
 
 
 class CountryDetailsFragment : Fragment() {
@@ -44,33 +46,61 @@ class CountryDetailsFragment : Fragment() {
         setDateTime()
         changeSubscription()
         viewModel = ViewModelProviders.of(this).get(CountryDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
-        viewModel.setCountryEntity(args.contryData)
-        country = args.contryData
+        country = args.countryData
         country?.let {
             setUpCountryData(it)
+            viewModel.setCountryEntity(country)
             setUpSubscriptionButton(it.country)
         }
-//        viewModel.getCountryData()?.observe(viewLifecycleOwner,Observer<CountyEntity>{
-//            it?.let {
-//                country = it
-//                setUpCountryData(it)
-//                setUpSubscriptionButton(it.country)
-//            }
-//        })
 
-        viewModel.getCountryHistory().observe(viewLifecycleOwner,Observer<LocalCountryHistory>{
-            setUICardsEmpty()
-            it?.let {
-                setUICards(it)
-                Timber.w(it.toString())
-            }
+        viewModel.getCountryHistory().observe(viewLifecycleOwner, Observer {
+            setUpCardWithData(caseChart,it.timeline.cases.keys.toList().takeLast(7),it.timeline.cases.values.toList().takeLast(7))
+            setUpCardWithData(deathChart,it.timeline.deaths.keys.toList().takeLast(7),it.timeline.deaths.values.toList().takeLast(7))
+            setUpCardWithData(recoveredChart,it.timeline.recovered.keys.toList().takeLast(7),it.timeline.recovered.values.toList().takeLast(7))
         })
+    }
+
+
+
+    private fun setUpCardWithData(lineChart: LineChart,xAxisList : List<String>, yAxisList : List<Long>){
+        val entries = ArrayList<Entry>()
+        xAxisList.forEachIndexed { index, s ->
+            entries.add(Entry(index.toFloat(),yAxisList[index].toFloat()))
+        }
+
+        val vl = LineDataSet(entries, "Latest Case History")
+
+        vl.setDrawValues(false)
+        vl.setDrawFilled(true)
+        vl.lineWidth = 3f
+        vl.fillColor = R.color.primaryLightColor
+        vl.fillAlpha = R.color.darkColor
+
+        lineChart.xAxis.labelRotationAngle = 0f
+        lineChart.data = LineData(vl)
+
+        val formatYList = xAxisList.takeLast(7).map {
+            it.split("/").subList(0,2).joinToString("/")
+        }.toList()
+
+        lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(formatYList)
+
+        lineChart.axisRight.isEnabled = false
+        lineChart.getAxisLeft().axisMinimum = yAxisList.min()!!.toFloat();
+        lineChart.getAxisLeft().axisMaximum = yAxisList.max()!!.toFloat()+ 0.1f;
+
+        lineChart.setTouchEnabled(true)
+        lineChart.setPinchZoom(true)
+
+        lineChart.description.text = "Days"
+        caseChart.setNoDataText("No forex yet!")
+
+        lineChart.animateX(1800, Easing.EaseInExpo)
     }
 
     fun setUpSubscriptionButton(countryName: String){
         viewModel.isCountrySubscribed(countryName).observe(viewLifecycleOwner, Observer {
-            it?.let {
+            it.let {
                 subscribeButton.isFavorite = true
             }
         })
@@ -89,26 +119,17 @@ class CountryDetailsFragment : Fragment() {
             })
     }
 
-    private fun setUpCountryData(CountryModel: CountryModel) {
-        deathTodayTextView.setText("Today's Death: ${CountryModel.todayDeaths.toString()}")
-        casesTodayTextView.setText("Today's Cases: ${CountryModel.todayCases.toString()}")
-        totalRecoveredTextView.setText(CountryModel.recovered.toString())
-        totalDeathsTextView.setText(CountryModel.deaths.toString())
-        totalCasesTextView.setText(CountryModel.cases.toString())
+    private fun setUpCountryData(countryModel: CountryModel) {
+        deathTodayTextView.text = "Today's Death: ${countryModel.todayDeaths.toString()}"
+        casesTodayTextView.text = "Today's Cases: ${countryModel.todayCases.toString()}"
+        totalRecoveredTextView.text = countryModel.recovered.toString()
+        totalDeathsTextView.text = countryModel.deaths.toString()
+        totalCasesTextView.text = countryModel.cases.toString()
+        countyName.text = countryModel.country
     }
 
     fun setDateTime(){
         dateTimeTextView.setText("Date: ${DateTime.now().date} \nTime: ${DateTime.now().time}")
-    }
-
-    fun setUICardsEmpty(){
-    }
-
-
-    fun setUICards(localCountryHistory: LocalCountryHistory){
-//        totalCasesTextView.setText(localCountryHistory.timeline.cases.values.last().toString())
-//        totalDeathsTextView.setText(localCountryHistory.timeline.deaths.values.last().toString())
-//        totalRecoveredTextView.setText(localCountryHistory.timeline.recovered.values.last().toString())
     }
 
 }

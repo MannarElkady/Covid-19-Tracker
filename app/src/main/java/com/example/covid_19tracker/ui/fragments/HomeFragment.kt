@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,10 @@ class HomeFragment : Fragment() {
             CountryAdapter(CountryListener { countryName -> viewModel.onCountryClicked(countryName) })
         binding.countryList.adapter = adapter
 
+//        //to be deleted
+//        viewModel.country.observe(viewLifecycleOwner, Observer {
+//        })
+//        //to be deleted
         viewModel.navigateToCountryDetails.observe(viewLifecycleOwner, Observer {
             it?.let {
                 val action = HomeFragmentDirections.actionHomeFragmentToCountryDetails(it)

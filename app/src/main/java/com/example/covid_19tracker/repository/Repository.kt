@@ -1,17 +1,12 @@
 package com.example.covid_19tracker.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
 import com.example.covid_19tracker.database.*
 import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.domain.asCountryModel
 import com.example.covid_19tracker.domain.asCountryModelList
 import com.example.covid_19tracker.network.*
-import com.example.covid_19tracker.utils.Covid_19Notification
 import kotlinx.coroutines.*
-import timber.log.Timber
 
 class Repository(
     private val remoteDataSource: DiseaseAPI,
@@ -22,7 +17,6 @@ class Repository(
             it.asCountryModelList()
         }
 
-
     override suspend fun refreshCountries(){
         withContext(Dispatchers.IO) {
             val countries = remoteDataSource.getCountriesData()
@@ -30,24 +24,38 @@ class Repository(
         }
     }
 
-    private fun shouldNotify(countries: List<CountryData>,subscribed: List<CountryEntitySubscribed>) : Boolean{
-        val isChanged = ArrayList<Boolean>(1)
-        countries.forEach{ coutrydata ->
-            subscribed.filter {
-                return coutrydata.country.equals(it.country)
-            }.any{
-                isChanged[0] = (coutrydata.cases != it.totalCases)
-                coutrydata.cases != it.totalCases
-            }
-        }
-        return isChanged[0]
+    private fun shouldNotify(countries: List<CountryData>,subscribed: CountryEntitySubscribed) : Boolean{
+        val newCases = countries.filter {
+            it.country.equals(subscribed.country)
+        }.first().cases
+        val notify = subscribed.totalCases != newCases
+        localDataSource.updateCountrySubscriped(CountryEntitySubscribed(subscribed.country,newCases,subscribed.countryThumb))
+        return notify
     }
 
     override suspend fun getCountryData(countryName: String): LiveData<CountryModel>? {
         return Transformations.map(localDataSource.getCountryByName(countryName)) {
             it.asCountryModel()
         }
+    }
 
+    override suspend fun notifyCountries(): List<String> {
+        val listOfCoutriesToNotify = arrayListOf<String>()
+        withContext(Dispatchers.IO) {
+            val countries = remoteDataSource.getCountriesData()
+            val subscribedList = getAllCoutrySubscribed()
+            subscribedList.forEach {
+                if(shouldNotify(countries,it)) {
+                    listOfCoutriesToNotify.add(it.country)
+                }
+            }
+            localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
+        }
+        return listOfCoutriesToNotify
+    }
+
+    override fun updateCountrySubscriped(countryEntitySubscribed: CountryEntitySubscribed) {
+        return localDataSource.updateCountrySubscriped(countryEntitySubscribed)
     }
 
     override fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed) {
@@ -58,8 +66,18 @@ class Repository(
         localDataSource.deleteCountrySubscribed(countryEntitySubscribed)
     }
 
-    override fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>> {
-        return localDataSource.getAllCoutrySubscribed()
+    override suspend fun getAllCoutrySubscribed(): List<CountryEntitySubscribed> {
+        var listOfCountry : List<CountryEntitySubscribed> = listOf()
+        runBlocking {
+            withContext(Dispatchers.IO){
+                listOfCountry = localDataSource.getAllCoutrySubscribed()
+            }
+        }
+        return listOfCountry
+    }
+
+    override fun getAllCoutrySubscribedLiveData(): LiveData<List<CountryEntitySubscribed>> {
+        return localDataSource.getAllCoutrySubscribedLiveData()
     }
 
     override fun getCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed> {
@@ -84,7 +102,5 @@ class Repository(
         localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
         return localDataSource.getAllHistory()
     }
-
-
 
 }

@@ -18,7 +18,10 @@ interface CovidDao {
     fun deleteCountrySubscribed(countryEntitySubscribed :CountryEntitySubscribed)
 
     @Query("Select * From countrySubscribed")
-    fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>>
+    fun getAllCoutrySubscribed(): List<CountryEntitySubscribed>
+
+    @Query("Select * From countrySubscribed")
+    fun getAllCoutrySubscribedLiveData(): LiveData<List<CountryEntitySubscribed>>
 
     @Query("Select * FROM country")
     fun getAllCountry(): LiveData<List<CountyEntity>>
@@ -37,6 +40,9 @@ interface CovidDao {
 
     @Query("SELECT * FROM country ORDER BY recovered DESC ")
     fun getCountryByRecovered(): List<CountyEntity>
+
+    @Update
+    fun updateCountrySubscriped(countryEntitySubscribed: CountryEntitySubscribed)
 
     // just for testing
     @Query("SELECT * FROM country WHERE country=:countryName")

@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.network
+    package com.example.covid_19tracker.network
 
 import com.squareup.moshi.JsonClass
 
@@ -39,7 +39,7 @@ data class GeneralInfo(val updated: Long
 
 @JsonClass(generateAdapter = true)
 data class CountryHistory(val country: String
-                          ,val provinces: List<String>
+                          ,val province: List<String>
                           ,val timeline: History
 )
 

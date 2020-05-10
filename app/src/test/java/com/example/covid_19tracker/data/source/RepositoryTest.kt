@@ -84,7 +84,7 @@ fun createMockData(): List<CountryHistory> {
                     "4/7/20" to 423,
                     "4/8/20" to 444
                 )
-            ), provinces = listOf("one", "two", "three")
+            ), province = listOf("one", "two", "three")
         ), CountryHistory(
             country = "USA", timeline = History(
                 cases = mapOf<String, Long>(
@@ -125,7 +125,7 @@ fun createMockData(): List<CountryHistory> {
                     "4/7/20" to 423,
                     "4/8/20" to 444
                 )
-            ), provinces = listOf("one", "two", "three")
+            ), province = listOf("one", "two", "three")
         )
     )
 }
