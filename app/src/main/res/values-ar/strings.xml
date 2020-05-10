@@ -16,6 +16,13 @@
         <item>عدد الوفيات</item>
         <item>عدد الحالات المعافاة</item>
     </string-array>
+    <string name="enable_dark_mode">" تفعيل الوضع الليلى"</string>
+    <string name="enable_notification">تفعيل الاشعارات</string>
+    <string name="choose_lan">"تحديد اللغة "</string>
+    <array name="languages">
+        <item>العربية</item>
+        <item>الانجليزية</item>
+    </array>
     <!--Ahmed-->
     <!--Manar-->
     <string name="app_name">Covid-19 Tracker</string>
