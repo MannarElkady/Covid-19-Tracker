@@ -12,6 +12,21 @@
     <string name="keep_distance">Keep a safe distance from others</string>
     <string name="wash_hand">Wash your hands regularly</string>
     <string name="cover_mouth">Cover your mouth and nose when you cough</string>
+    <string name="enable_dark_mode">Enable Dark Mode</string>
+    <string name="enable_notification">Enable Notification</string>
+    <string name="choose_lan">Choose Language</string>
+    <string name="dark_mode_key" translatable="false">dark_mode</string>
+    <string name="notification_key" translatable="false">notification</string>
+    <string name="language_key" translatable="false">language</string>
+    <array name="languages_key">
+        <item>Ar</item>
+        <item>En</item>
+    </array>
+    <array name="languages">
+        <item>Ar</item>
+        <item>En</item>
+    </array>
+
     <string-array name="order_list">
         <item>cases</item>
         <item>death</item>
@@ -26,5 +41,20 @@
     <string name="ApplicationChannelDescription">Covid_19 Tracker Notfications Channel</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="No_SubScribed_String">No Subscription Yet.. Go to Home Screen and Select a country to subscribe</string>
+    <string name="dark_mode">Dark mode</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!--Manar-->
 </resources>

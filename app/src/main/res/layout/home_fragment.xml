@@ -34,10 +34,9 @@
                 android:layout_height="220dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                card_view:cardBackgroundColor="@color/primaryColor"
+                card_view:cardBackgroundColor="?colorPrimary"
                 card_view:cardCornerRadius="25dp"
                 card_view:cardElevation="0dp">
-
                 <include layout="@layout/hot_line_call"
                     bind:viewModel="@{viewModel}"/>
             </com.google.android.material.card.MaterialCardView>
