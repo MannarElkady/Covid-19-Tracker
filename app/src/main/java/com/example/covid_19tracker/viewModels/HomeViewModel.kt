@@ -19,7 +19,7 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
     private var _navigateToDetails = MutableLiveData<CountryModel>()
     private var filter = FilterHolder()
     private var _orderedList = MutableLiveData<List<CountryModel>>()
-
+    val totalWorld = repository.totalWorld
     val orderdList: LiveData<List<CountryModel>>
         get() = _orderedList
 
@@ -62,6 +62,12 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
                     else -> orderListByRecovered()
                 }
             }
+        }
+    }
+
+    fun sync() {
+        viewModelScope.launch {
+            repository.refreshCountries()
         }
     }
 

@@ -16,11 +16,16 @@ class Repository(
         Transformations.map(localDataSource.getAllCountry()) {
             it.asCountryModelList()
         }
-
+override val totalWorld: LiveData<CountryModel> =
+    Transformations.map(localDataSource.getTotalWorld()) {
+        it.asCountryModel()
+    }
     override suspend fun refreshCountries(){
         withContext(Dispatchers.IO) {
             val countries = remoteDataSource.getCountriesData()
+            val totalWorld = remoteDataSource.getGeneralInfo()
             localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
+            localDataSource.insertCountry(totalWorld.asCountryEntity())
         }
     }
 

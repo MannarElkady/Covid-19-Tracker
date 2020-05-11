@@ -34,6 +34,10 @@ class LocalDataSource(context: Context) : CovidDao {
         return dao.getAllCountry()
     }
 
+    override fun getTotalWorld(): LiveData<CountyEntity> {
+        return  dao.getTotalWorld()
+    }
+
     override fun getCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed> {
         return dao.getCountrySubscribed(countryName)
     }
