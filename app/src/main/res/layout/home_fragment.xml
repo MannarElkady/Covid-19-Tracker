@@ -18,6 +18,41 @@
         android:background="@color/applicationBackgroundColor"
         tools:context=".ui.fragments.HomeFragment">
 
+        <LinearLayout
+            android:id="@+id/total_contaner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/card_view_outer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_world"
+                style="@style/TextAppearance.AppCompat.Body1"
+                />
+            <TextView
+                android:id="@+id/total_world"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Long.toString(viewModel.totalWorld.cases)}"
+                android:layout_marginStart="5dp"
+                style="@style/TextAppearance.AppCompat.Body1"
+                />
+            <TextView
+                android:id="@+id/sync"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sync"
+                android:gravity="end"
+                android:padding="5dp"
+                android:drawableEnd="@drawable/ic_sync_black_24dp"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:onClick="@{()->viewModel.sync()}"
+                />
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/card_view_outer"
@@ -45,13 +80,13 @@
         <LinearLayout
             android:id="@+id/horizontal_scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="10dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/country_list"
             app:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.0"
-            card_view:layout_constraintTop_toBottomOf="@+id/card_view_outer">
+            card_view:layout_constraintTop_toBottomOf="@+id/total_contaner">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/filter_list"

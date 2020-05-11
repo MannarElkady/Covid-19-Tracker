@@ -34,5 +34,6 @@
     <string name="ApplicationChannelName">Covid_19 Tracker</string>
     <string name="ApplicationChannelDescription">Covid_19 Tracker Notfications Channel</string>
     <string name="No_SubScribed_String">لم تقم بأختيار أي متابعات </string>
+    <string name="total_world">"المجموع  الكلى :"</string>
     <!--Manar-->
 </resources>

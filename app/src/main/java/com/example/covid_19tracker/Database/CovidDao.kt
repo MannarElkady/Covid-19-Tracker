@@ -15,16 +15,19 @@ interface CovidDao {
     fun insertContrySubscribed(countryEntitySubscribed: CountryEntitySubscribed)
 
     @Delete
-    fun deleteCountrySubscribed(countryEntitySubscribed :CountryEntitySubscribed)
+    fun deleteCountrySubscribed(countryEntitySubscribed: CountryEntitySubscribed)
 
     @Query("Select * From countrySubscribed")
     fun getAllCoutrySubscribed(): LiveData<List<CountryEntitySubscribed>>
 
-    @Query("Select * FROM country")
+    @Query("Select * FROM country WHERE country!='total_world'")
     fun getAllCountry(): LiveData<List<CountyEntity>>
 
+    @Query("Select * FROM country WHERE country='total_world'")
+    fun getTotalWorld(): LiveData<CountyEntity>
+
     @Query("SELECT * FROM countrySubscribed WHERE country=:countryName")
-    fun getCountrySubscribed(countryName: String):LiveData<CountryEntitySubscribed>
+    fun getCountrySubscribed(countryName: String): LiveData<CountryEntitySubscribed>
 
     @Query("SELECT * FROM country_history WHERE country=:countryName")
     fun geCountryHistory(countryName: String): LiveData<LocalCountryHistory>
