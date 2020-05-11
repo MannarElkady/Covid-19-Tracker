@@ -23,9 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/card_view_outer">
+            card_view:layout_constraintTop_toBottomOf="@+id/card_view_outer"
+            card_view:layout_constraintBottom_toTopOf="@+id/horizontal_scroll">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +82,7 @@
         <LinearLayout
             android:id="@+id/horizontal_scroll"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/country_list"
             app:layout_constraintStart_toStartOf="parent"

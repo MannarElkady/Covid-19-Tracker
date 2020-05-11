@@ -16,18 +16,36 @@
     <string name="enable_notification">Enable Notification</string>
     <string name="choose_lan">Choose Language</string>
     <string name="dark_mode_key" translatable="false">dark_mode</string>
-    <string name="notification_key" translatable="false">notification</string>
+    <string name="enable_notification_key" translatable="false">notify_key</string>
     <string name="language_key" translatable="false">language</string>
+    <string name="language">language</string>
+    <string name="notification">notification</string>
+
     <string name="total_world">Total World:</string>
     <array name="languages_key">
         <item>Ar</item>
         <item>En</item>
     </array>
     <array name="languages">
-        <item>Ar</item>
-        <item>En</item>
+        <item>
+            <string name="ar">AR</string>
+        </item>
+        <item>
+            <string name="en">EN</string>
+        </item>
     </array>
-
+    <array name="notifications_key">
+        <item>1_hour</item>
+        <item>2_hour</item>
+        <item>5_hour</item>
+        <item>once_a_day</item>
+    </array>
+    <array name="notifications_value">
+        <item>1 hour</item>
+        <item>2 hour</item>
+        <item>5 hour</item>
+        <item>Once a day</item>
+    </array>
     <string-array name="order_list">
         <item>cases</item>
         <item>death</item>

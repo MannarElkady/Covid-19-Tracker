@@ -9,21 +9,22 @@ import com.example.covid_19tracker.ui.activity.MainActivity
 import java.util.*
 
 
-class PrefrenceFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPreferenceChangeListener {
-    private lateinit var sharedPreferences :SharedPreferences
+class PrefrenceFragment : PreferenceFragmentCompat(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var prefrenceScreen: PreferenceScreen
-    private  var count: Int = 0
+    private var count: Int = 0
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
         prefrenceScreen = preferenceScreen
-        sharedPreferences= preferenceScreen.sharedPreferences
+        sharedPreferences = preferenceScreen.sharedPreferences
         count = prefrenceScreen.preferenceCount
         // Go through all of the preferences, and set up their preference summary.
-        for (i in  0 until  count) {
+        for (i in 0 until count) {
             val prefrence = prefrenceScreen.getPreference(i)
-                val value = sharedPreferences.getString(prefrence.key,"")
-                prefrence.setSummary(value)
-            }
+            val value = sharedPreferences.getString(prefrence.key, "")
+            prefrence.setSummary(value)
+        }
 
     }
 
@@ -39,10 +40,13 @@ class PrefrenceFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedP
                 setPreferenceSummary(preference, value!!)
             }
         }
-        setupLocal()
-        requireActivity().finish()
-        startActivity(requireActivity().intent)
+        if (key != getString(R.string.enable_notification_key)) {
+            setupLocal()
+            requireActivity().finish()
+            startActivity(requireActivity().intent)
+        }
     }
+
     private fun setupLocal() {
         var change = ""
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -55,6 +59,7 @@ class PrefrenceFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedP
 
         MainActivity.dLocale = Locale(change) //set any locale you want here
     }
+
     /**
      * Updates the summary for the preference
      *

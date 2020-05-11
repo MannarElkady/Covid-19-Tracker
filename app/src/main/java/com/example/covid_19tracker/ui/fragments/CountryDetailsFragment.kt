@@ -54,18 +54,35 @@ class CountryDetailsFragment : Fragment() {
         }
 
         viewModel.getCountryHistory().observe(viewLifecycleOwner, Observer {
-            setUpCardWithData(caseChart,it.timeline.cases.keys.toList().takeLast(7),it.timeline.cases.values.toList().takeLast(7))
-            setUpCardWithData(deathChart,it.timeline.deaths.keys.toList().takeLast(7),it.timeline.deaths.values.toList().takeLast(7))
-            setUpCardWithData(recoveredChart,it.timeline.recovered.keys.toList().takeLast(7),it.timeline.recovered.values.toList().takeLast(7))
+            it?.let {
+                setUpCardWithData(
+                    caseChart,
+                    it.timeline.cases.keys.toList().takeLast(7),
+                    it.timeline.cases.values.toList().takeLast(7)
+                )
+                setUpCardWithData(
+                    deathChart,
+                    it.timeline.deaths.keys.toList().takeLast(7),
+                    it.timeline.deaths.values.toList().takeLast(7)
+                )
+                setUpCardWithData(
+                    recoveredChart,
+                    it.timeline.recovered.keys.toList().takeLast(7),
+                    it.timeline.recovered.values.toList().takeLast(7)
+                )
+            }
         })
     }
 
 
-
-    private fun setUpCardWithData(lineChart: LineChart,xAxisList : List<String>, yAxisList : List<Long>){
+    private fun setUpCardWithData(
+        lineChart: LineChart,
+        xAxisList: List<String>,
+        yAxisList: List<Long>
+    ) {
         val entries = ArrayList<Entry>()
         xAxisList.forEachIndexed { index, s ->
-            entries.add(Entry(index.toFloat(),yAxisList[index].toFloat()))
+            entries.add(Entry(index.toFloat(), yAxisList[index].toFloat()))
         }
 
         val vl = LineDataSet(entries, "Latest Case History")
@@ -80,14 +97,14 @@ class CountryDetailsFragment : Fragment() {
         lineChart.data = LineData(vl)
 
         val formatYList = xAxisList.takeLast(7).map {
-            it.split("/").subList(0,2).joinToString("/")
+            it.split("/").subList(0, 2).joinToString("/")
         }.toList()
 
         lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(formatYList)
 
         lineChart.axisRight.isEnabled = false
         lineChart.getAxisLeft().axisMinimum = yAxisList.min()!!.toFloat();
-        lineChart.getAxisLeft().axisMaximum = yAxisList.max()!!.toFloat()+ 0.1f;
+        lineChart.getAxisLeft().axisMaximum = yAxisList.max()!!.toFloat() + 0.1f;
 
         lineChart.setTouchEnabled(true)
         lineChart.setPinchZoom(true)
@@ -98,7 +115,7 @@ class CountryDetailsFragment : Fragment() {
         lineChart.animateX(1800, Easing.EaseInExpo)
     }
 
-    fun setUpSubscriptionButton(countryName: String){
+    fun setUpSubscriptionButton(countryName: String) {
         viewModel.isCountrySubscribed(countryName).observe(viewLifecycleOwner, Observer {
             it.let {
                 subscribeButton.isFavorite = true
@@ -128,7 +145,7 @@ class CountryDetailsFragment : Fragment() {
         countyName.text = countryModel.country
     }
 
-    fun setDateTime(){
+    fun setDateTime() {
         dateTimeTextView.setText("Date: ${DateTime.now().date} \nTime: ${DateTime.now().time}")
     }
 

@@ -11,6 +11,7 @@
     <string name="keep_distance">حافظ على مسافة آمنة من الآخرين</string>
     <string name="wash_hand">اغسل يديك بشكل منتظم</string>
     <string name="cover_mouth">غط فمك وأنفك عندما تسعل</string>
+    <string name="language">اللغة</string>
     <string-array name="order_list">
         <item>االحالات</item>
         <item>عدد الوفيات</item>
@@ -19,10 +20,6 @@
     <string name="enable_dark_mode">" تفعيل الوضع الليلى"</string>
     <string name="enable_notification">تفعيل الاشعارات</string>
     <string name="choose_lan">"تحديد اللغة "</string>
-    <array name="languages">
-        <item>العربية</item>
-        <item>الانجليزية</item>
-    </array>
     <!--Ahmed-->
     <!--Manar-->
     <string name="app_name">Covid-19 Tracker</string>
@@ -35,5 +32,6 @@
     <string name="ApplicationChannelDescription">Covid_19 Tracker Notfications Channel</string>
     <string name="No_SubScribed_String">لم تقم بأختيار أي متابعات </string>
     <string name="total_world">"المجموع  الكلى :"</string>
+    <string name="notification">الاشعارات</string>
     <!--Manar-->
 </resources>
