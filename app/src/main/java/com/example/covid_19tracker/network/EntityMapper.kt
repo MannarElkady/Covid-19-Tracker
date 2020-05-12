@@ -43,6 +43,28 @@ fun History.asLocalHistory(): LocalHistory {
 fun List<CountryData>.asLocalCountryList(): List<CountyEntity> {
     return map { it.asLocalCountryEntity() }
 }
+
 fun List<CountryHistory>.asLocalCountryHistoryList(): List<LocalCountryHistory> {
     return map { it.asLocalCountryHistory() }
+}
+
+fun List<GeneralInfo>.asCountryEntityList(): List<CountyEntity> {
+    return map { it.asCountryEntity() }
+}
+
+fun GeneralInfo.asCountryEntity(): CountyEntity {
+    return CountyEntity(
+        country = "total_world",
+        todayCases = todayCases,
+        todayDeaths = todayDeaths,
+        updated = updated,
+        deathsPerOneMillion = deathsPerOneMillion,
+        casesPerOneMillion = casesPerOneMillion,
+        critical = critical,
+        cases = cases,
+        active = active,
+        recovered = recovered,
+        deaths = deaths,
+        countryInfo = LocalCountryInfo()
+    )
 }

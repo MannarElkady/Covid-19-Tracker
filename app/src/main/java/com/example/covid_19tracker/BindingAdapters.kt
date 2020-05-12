@@ -11,7 +11,7 @@ import com.example.covid_19tracker.domain.CountryModel
 import com.example.covid_19tracker.ui.adapters.CountryAdapter
 
 /**
- * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
+ * When there is no  property data (data is null), hide the [RecyclerView], otherwise show it.
  */
 @BindingAdapter("list")
 fun bindRecycler(recyclerView: RecyclerView, data: List<CountryModel>?) {
@@ -30,7 +30,16 @@ fun bindimage(imgView: ImageView, imgUrl: String?) {
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_broken_image))
+                    .error(R.drawable.ic_broken_image)
+            )
             .into(imgView)
     }
+}
+
+@BindingAdapter("drwable_image")
+fun bindDrawable(imgView: ImageView, imgUrl: Int?) {
+    imgUrl?.let {
+        Glide.with(imgView.context).load(imgView.resources.getDrawable(imgUrl, null)).into(imgView);
+    }
+
 }

@@ -8,6 +8,7 @@ import com.example.covid_19tracker.domain.CountryModel
 
 interface RepositoryContract {
     val countryList: LiveData<List<CountryModel>>
+    val totalWorld: LiveData<CountryModel>
     suspend fun refreshCountries()
     fun getCountryHistory(countryName: String): LiveData<LocalCountryHistory>
     suspend fun getCountryHistroyList(name: String): List<LocalCountryHistory>

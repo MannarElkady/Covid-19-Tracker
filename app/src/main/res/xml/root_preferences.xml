@@ -5,15 +5,18 @@
     <PreferenceCategory
         app:title="@string/Setting">
 
-    <SwitchPreferenceCompat
-        app:icon="@drawable/ic_notification"
-        app:key="@string/notification_key"
-        app:title="@string/enable_notification"/>
 
     <SwitchPreferenceCompat
         app:icon="@drawable/ic_miscellaneous"
         app:key="@string/dark_mode_key"
         app:title="@string/enable_dark_mode"/>
+        <ListPreference
+            app:key="@string/enable_notification_key"
+            app:icon="@drawable/ic_notification"
+            app:title="@string/notification"
+            app:entries="@array/notifications_key"
+            app:entryValues="@array/notifications_value"
+            />
     <ListPreference
         app:icon="@drawable/ic_translate"
         app:key="@string/language_key"

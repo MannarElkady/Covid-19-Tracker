@@ -7,6 +7,7 @@ import com.example.covid_19tracker.domain.asCountryModel
 import com.example.covid_19tracker.domain.asCountryModelList
 import com.example.covid_19tracker.network.*
 import kotlinx.coroutines.*
+import timber.log.Timber
 
 class Repository(
     private val remoteDataSource: DiseaseAPI,
@@ -16,20 +17,40 @@ class Repository(
         Transformations.map(localDataSource.getAllCountry()) {
             it.asCountryModelList()
         }
+    override val totalWorld: LiveData<CountryModel> =
+        Transformations.map(localDataSource.getTotalWorld()) {
+            it?.asCountryModel()
+        }
 
-    override suspend fun refreshCountries(){
+    override suspend fun refreshCountries() {
         withContext(Dispatchers.IO) {
-            val countries = remoteDataSource.getCountriesData()
-            localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
+            try {
+                val countries = remoteDataSource.getCountriesData()
+                val totalWorld = remoteDataSource.getGeneralInfo()
+                localDataSource.insertCountry(* countries.asLocalCountryList().toTypedArray())
+                localDataSource.insertCountry(totalWorld.asCountryEntity())
+            } catch (e: Exception) {
+                Timber.w(e.message)
+            }
+
         }
     }
 
-    private fun shouldNotify(countries: List<CountryData>,subscribed: CountryEntitySubscribed) : Boolean{
+    private fun shouldNotify(
+        countries: List<CountryData>,
+        subscribed: CountryEntitySubscribed
+    ): Boolean {
         val newCases = countries.filter {
             it.country.equals(subscribed.country)
         }.first().cases
         val notify = subscribed.totalCases != newCases
-        localDataSource.updateCountrySubscriped(CountryEntitySubscribed(subscribed.country,newCases,subscribed.countryThumb))
+        localDataSource.updateCountrySubscriped(
+            CountryEntitySubscribed(
+                subscribed.country,
+                newCases,
+                subscribed.countryThumb
+            )
+        )
         return notify
     }
 
@@ -45,7 +66,7 @@ class Repository(
             val countries = remoteDataSource.getCountriesData()
             val subscribedList = getAllCoutrySubscribed()
             subscribedList.forEach {
-                if(shouldNotify(countries,it)) {
+                if (shouldNotify(countries, it)) {
                     listOfCoutriesToNotify.add(it.country)
                 }
             }
@@ -67,9 +88,9 @@ class Repository(
     }
 
     override suspend fun getAllCoutrySubscribed(): List<CountryEntitySubscribed> {
-        var listOfCountry : List<CountryEntitySubscribed> = listOf()
+        var listOfCountry: List<CountryEntitySubscribed> = listOf()
         runBlocking {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 listOfCountry = localDataSource.getAllCoutrySubscribed()
             }
         }
@@ -88,8 +109,13 @@ class Repository(
     override fun getCountryHistory(countryName: String): LiveData<LocalCountryHistory> {
         runBlocking {
             withContext(Dispatchers.IO) {
-                val countryHistory = remoteDataSource.getCountryHistory(countryName)
-                localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+                try {
+
+                    val countryHistory = remoteDataSource.getCountryHistory(countryName)
+                    localDataSource.insertCountryHistory(countryHistory.asLocalCountryHistory())
+                } catch (e: Exception) {
+                    Timber.w(e.message)
+                }
             }
         }
 

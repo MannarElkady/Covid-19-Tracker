@@ -12,14 +12,15 @@ import timber.log.Timber
 
 class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
     val countryList = repository.countryList
-   // val country = repository.countrySub
+
+    // val country = repository.countrySub
     private var _callHotLine = MutableLiveData<Boolean>()
     val callHotline: LiveData<Boolean>
         get() = _callHotLine
     private var _navigateToDetails = MutableLiveData<CountryModel>()
     private var filter = FilterHolder()
     private var _orderedList = MutableLiveData<List<CountryModel>>()
-
+    val totalWorld = repository.totalWorld
     val orderdList: LiveData<List<CountryModel>>
         get() = _orderedList
 
@@ -31,9 +32,12 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
 
 
     init {
-        viewModelScope.launch {
+
+
+        viewModelScope.launch{
             repository.refreshCountries()
         }
+
     }
 
 
@@ -62,6 +66,12 @@ class HomeViewModel(private val repository: RepositoryContract) : ViewModel() {
                     else -> orderListByRecovered()
                 }
             }
+        }
+    }
+
+    fun sync() {
+        viewModelScope.launch {
+            repository.refreshCountries()
         }
     }
 
